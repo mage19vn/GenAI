@@ -1,0 +1,326 @@
+/* ============================================
+   ANIMATIONS — AI Gemini Presentation
+   GPU-accelerated, 60fps
+   ============================================ */
+
+/* --- Base Animation Classes --- */
+.anim-ready {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.anim-ready.anim-visible {
+  opacity: 1;
+}
+
+/* --- Fade Animations --- */
+.fade-in {
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-smooth);
+}
+
+.fade-in.anim-visible {
+  opacity: 1;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+.fade-up.anim-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-down {
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+.fade-down.anim-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+.fade-left.anim-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-right {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+.fade-right.anim-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- Scale Animations --- */
+.scale-in {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-spring);
+}
+
+.scale-in.anim-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scale-up {
+  opacity: 0;
+  transform: scale(0.5) translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-spring);
+}
+
+.scale-up.anim-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* --- Stagger Delays --- */
+.delay-1 { transition-delay: 100ms; }
+.delay-2 { transition-delay: 200ms; }
+.delay-3 { transition-delay: 300ms; }
+.delay-4 { transition-delay: 400ms; }
+.delay-5 { transition-delay: 500ms; }
+.delay-6 { transition-delay: 600ms; }
+.delay-7 { transition-delay: 700ms; }
+.delay-8 { transition-delay: 800ms; }
+.delay-9 { transition-delay: 900ms; }
+.delay-10 { transition-delay: 1000ms; }
+
+/* --- Keyframe Animations --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(4px) rotate(-1deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(108, 99, 255, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(108, 99, 255, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  0%, 50% { border-color: var(--primary); }
+  51%, 100% { border-color: transparent; }
+}
+
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleInCenter {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes morphIn {
+  0% { clip-path: circle(0% at 50% 50%); }
+  100% { clip-path: circle(150% at 50% 50%); }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(108, 99, 255, 0.5),
+                 0 0 20px rgba(108, 99, 255, 0.3),
+                 0 0 40px rgba(108, 99, 255, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(108, 99, 255, 0.8),
+                 0 0 40px rgba(108, 99, 255, 0.5),
+                 0 0 60px rgba(108, 99, 255, 0.2);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 0.5; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes lightBeam {
+  0% { transform: translateX(-100%) rotate(-45deg); }
+  100% { transform: translateX(200%) rotate(-45deg); }
+}
+
+/* --- Utility Animation Classes --- */
+.animate-float {
+  animation: float 4s var(--ease-smooth) infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s var(--ease-smooth) infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s var(--ease-smooth) infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s var(--ease-smooth) infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+.animate-glow-text {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}
+
+/* --- Slide Transitions --- */
+.slide-transition-fade .slide {
+  transition: opacity var(--duration-slow) var(--ease-smooth);
+}
+
+.slide-transition-slide .slide-entering {
+  animation: slideInFromRight var(--duration-slow) var(--ease-smooth) forwards;
+}
+
+.slide-transition-slide .slide-exiting {
+  animation: slideInFromLeft var(--duration-slow) var(--ease-smooth) reverse forwards;
+}
+
+/* --- Light Beam Effect --- */
+.light-beam {
+  position: relative;
+  overflow: hidden;
+}
+
+.light-beam::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.03),
+    transparent
+  );
+  animation: lightBeam 8s linear infinite;
+  pointer-events: none;
+}
+
+/* --- Ripple Effect --- */
+.ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(108, 99, 255, 0.3);
+  animation: ripple 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .anim-ready {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+[data-reduced-motion="true"] .anim-ready {
+  opacity: 1;
+  transform: none;
+}

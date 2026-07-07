@@ -1,0 +1,496 @@
+/* ============================================
+   SIDEBAR — AI Gemini Presentation
+   ============================================ */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-right: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-sidebar);
+  transition: width var(--duration-normal) var(--ease-smooth);
+  overflow: hidden;
+}
+
+.sidebar-collapsed .sidebar {
+  width: var(--sidebar-collapsed);
+}
+
+/* --- Sidebar Header --- */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--card-border);
+  min-height: 68px;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  overflow: hidden;
+}
+
+.sidebar-logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.sidebar-logo-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity var(--duration-fast) var(--ease-smooth);
+}
+
+.sidebar-collapsed .sidebar-logo-text {
+  opacity: 0;
+  width: 0;
+}
+
+.sidebar-toggle {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all var(--duration-fast) var(--ease-smooth);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.sidebar-toggle:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-collapsed .sidebar-toggle svg {
+  transform: rotate(180deg);
+}
+
+/* --- Sidebar Navigation --- */
+.sidebar-nav {
+  flex: 1;
+  padding: var(--space-md);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 0.65rem var(--space-md);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-smooth);
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.sidebar-nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.sidebar-nav-item.active {
+  background: rgba(108, 99, 255, 0.12);
+  color: var(--primary-light);
+}
+
+.sidebar-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: var(--primary);
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+}
+
+.sidebar-nav-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.sidebar-nav-label {
+  opacity: 1;
+  transition: opacity var(--duration-fast) var(--ease-smooth);
+}
+
+.sidebar-collapsed .sidebar-nav-label {
+  opacity: 0;
+}
+
+/* --- Sidebar Footer --- */
+.sidebar-footer {
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  overflow: hidden;
+}
+
+.sidebar-footer-text {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity var(--duration-fast) var(--ease-smooth);
+}
+
+.sidebar-collapsed .sidebar-footer-text {
+  opacity: 0;
+}
+
+/* ============================================
+   RESPONSIVE — AI Gemini Presentation
+   ============================================ */
+
+/* --- Extra Large Screens --- */
+@media (min-width: 1441px) {
+  :root {
+    --slide-padding: 8rem;
+  }
+}
+
+/* --- Large Desktop --- */
+@media (max-width: 1440px) {
+  :root {
+    --slide-padding: 5rem;
+  }
+}
+
+/* --- Laptop --- */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 240px;
+    --slide-padding: 3rem;
+  }
+
+  .slide-layout-split {
+    gap: var(--space-2xl);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .comparison {
+    gap: var(--space-lg);
+  }
+
+  .mindmap {
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .docs-layout {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .presenter-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Tablet --- */
+@media (max-width: 768px) {
+  :root {
+    --slide-padding: 2rem;
+  }
+
+  /* Force sidebar collapsed on tablet */
+  .sidebar {
+    width: var(--sidebar-collapsed);
+  }
+
+  .sidebar .sidebar-logo-text,
+  .sidebar .sidebar-nav-label,
+  .sidebar .sidebar-footer-text {
+    opacity: 0;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-collapsed);
+  }
+
+  .slide-layout-split {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-bottom: var(--space-lg);
+  }
+
+  .prompt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .docs-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .docs-toc {
+    position: static;
+    max-height: none;
+    margin-bottom: var(--space-xl);
+  }
+
+  .nav-controls {
+    bottom: var(--space-md);
+    gap: var(--space-sm);
+    padding: 0.4rem;
+  }
+
+  .slide-counter {
+    bottom: var(--space-md);
+    right: var(--space-md);
+    font-size: var(--fs-xs);
+  }
+
+  .a11y-controls {
+    top: var(--space-md);
+    right: var(--space-md);
+  }
+}
+
+/* --- Mobile --- */
+@media (max-width: 480px) {
+  :root {
+    --slide-padding: 1.25rem;
+  }
+
+  .sidebar {
+    width: 0;
+    border-right: none;
+  }
+
+  .sidebar.mobile-open {
+    width: 280px;
+    box-shadow: 20px 0 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebar.mobile-open .sidebar-logo-text,
+  .sidebar.mobile-open .sidebar-nav-label,
+  .sidebar.mobile-open .sidebar-footer-text {
+    opacity: 1;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .mobile-menu-btn {
+    display: flex !important;
+    position: fixed;
+    top: var(--space-md);
+    left: var(--space-md);
+    z-index: calc(var(--z-sidebar) + 1);
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+  }
+
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: calc(var(--z-sidebar) - 1);
+  }
+
+  .sidebar.mobile-open ~ .mobile-overlay {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: var(--fs-3xl) !important;
+  }
+
+  .slide-title {
+    font-size: var(--fs-2xl);
+  }
+
+  .workflow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workflow-arrow {
+    transform: rotate(90deg);
+    align-self: center;
+  }
+
+  .nav-controls {
+    left: 50%;
+    width: auto;
+  }
+
+  .slide-counter {
+    display: none;
+  }
+
+  .fullscreen-btn {
+    display: none;
+  }
+
+  .a11y-controls {
+    top: var(--space-md);
+    right: var(--space-md);
+  }
+
+  .a11y-btn {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Default: hide mobile menu button */
+.mobile-menu-btn {
+  display: none;
+}
+
+/* ============================================
+   THEMES — AI Gemini Presentation
+   ============================================ */
+
+/* --- Light Mode --- */
+[data-theme="light"] {
+  --bg: #F8FAFC;
+  --bg-rgb: 248, 250, 252;
+  --bg-light: #F1F5F9;
+  --bg-lighter: #E2E8F0;
+
+  --text: #0F172A;
+  --text-rgb: 15, 23, 42;
+  --text-secondary: rgba(15, 23, 42, 0.65);
+  --text-muted: rgba(15, 23, 42, 0.4);
+
+  --card: rgba(15, 23, 42, 0.04);
+  --card-hover: rgba(15, 23, 42, 0.07);
+  --card-border: rgba(15, 23, 42, 0.08);
+
+  --gradient-hero: linear-gradient(135deg, #F8FAFC 0%, #EDE9FE 30%, #F8FAFC 60%, #E0F2FE 100%);
+  --gradient-glow: radial-gradient(circle at 50% 50%, rgba(108, 99, 255, 0.08) 0%, transparent 70%);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 30px rgba(108, 99, 255, 0.15);
+}
+
+[data-theme="light"] .sidebar {
+  background: rgba(248, 250, 252, 0.95);
+}
+
+[data-theme="light"] .sidebar-nav-item.active {
+  background: rgba(108, 99, 255, 0.08);
+}
+
+[data-theme="light"] .code-block {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .comparison-before {
+  background: rgba(220, 38, 38, 0.04);
+  border-color: rgba(220, 38, 38, 0.12);
+}
+
+[data-theme="light"] .comparison-after {
+  background: rgba(16, 185, 129, 0.04);
+  border-color: rgba(16, 185, 129, 0.12);
+}
+
+[data-theme="light"] .easter-egg-bg {
+  color: rgba(15, 23, 42, 0.015);
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(108, 99, 255, 0.2);
+  color: #0F172A;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.15);
+}
+
+/* Theme transition */
+body {
+  transition: background-color var(--duration-slow) var(--ease-smooth),
+              color var(--duration-slow) var(--ease-smooth);
+}
+
+/* --- Font Size Adjustments --- */
+[data-font-size="small"] {
+  font-size: 14px;
+}
+
+[data-font-size="normal"] {
+  font-size: 16px;
+}
+
+[data-font-size="large"] {
+  font-size: 18px;
+}
+
+[data-font-size="xlarge"] {
+  font-size: 20px;
+}
