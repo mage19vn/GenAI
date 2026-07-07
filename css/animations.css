@@ -1,12 +1,14 @@
 /* ============================================
    ANIMATIONS — AI Gemini Presentation
-   GPU-accelerated, 60fps
+   GPU-accelerated, 60fps, Edge-compatible
    ============================================ */
 
 /* --- Base Animation Classes --- */
 .anim-ready {
   opacity: 0;
   will-change: transform, opacity;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .anim-ready.anim-visible {
@@ -16,6 +18,7 @@
 /* --- Fade Animations --- */
 .fade-in {
   opacity: 0;
+  -webkit-transition: opacity var(--duration-slow) var(--ease-smooth);
   transition: opacity var(--duration-slow) var(--ease-smooth);
 }
 
@@ -25,74 +28,98 @@
 
 .fade-up {
   opacity: 0;
+  -webkit-transform: translateY(40px);
   transform: translateY(40px);
+  -webkit-transition: opacity var(--duration-slow) var(--ease-smooth),
+              -webkit-transform var(--duration-slow) var(--ease-smooth);
   transition: opacity var(--duration-slow) var(--ease-smooth),
               transform var(--duration-slow) var(--ease-smooth);
 }
 
 .fade-up.anim-visible {
   opacity: 1;
+  -webkit-transform: translateY(0);
   transform: translateY(0);
 }
 
 .fade-down {
   opacity: 0;
+  -webkit-transform: translateY(-40px);
   transform: translateY(-40px);
+  -webkit-transition: opacity var(--duration-slow) var(--ease-smooth),
+              -webkit-transform var(--duration-slow) var(--ease-smooth);
   transition: opacity var(--duration-slow) var(--ease-smooth),
               transform var(--duration-slow) var(--ease-smooth);
 }
 
 .fade-down.anim-visible {
   opacity: 1;
+  -webkit-transform: translateY(0);
   transform: translateY(0);
 }
 
 .fade-left {
   opacity: 0;
+  -webkit-transform: translateX(60px);
   transform: translateX(60px);
+  -webkit-transition: opacity var(--duration-slow) var(--ease-smooth),
+              -webkit-transform var(--duration-slow) var(--ease-smooth);
   transition: opacity var(--duration-slow) var(--ease-smooth),
               transform var(--duration-slow) var(--ease-smooth);
 }
 
 .fade-left.anim-visible {
   opacity: 1;
+  -webkit-transform: translateX(0);
   transform: translateX(0);
 }
 
 .fade-right {
   opacity: 0;
+  -webkit-transform: translateX(-60px);
   transform: translateX(-60px);
+  -webkit-transition: opacity var(--duration-slow) var(--ease-smooth),
+              -webkit-transform var(--duration-slow) var(--ease-smooth);
   transition: opacity var(--duration-slow) var(--ease-smooth),
               transform var(--duration-slow) var(--ease-smooth);
 }
 
 .fade-right.anim-visible {
   opacity: 1;
+  -webkit-transform: translateX(0);
   transform: translateX(0);
 }
 
 /* --- Scale Animations --- */
 .scale-in {
   opacity: 0;
+  -webkit-transform: scale(0.85);
   transform: scale(0.85);
+  -webkit-transition: opacity var(--duration-slow) var(--ease-smooth),
+              -webkit-transform var(--duration-slow) var(--ease-spring);
   transition: opacity var(--duration-slow) var(--ease-smooth),
               transform var(--duration-slow) var(--ease-spring);
 }
 
 .scale-in.anim-visible {
   opacity: 1;
+  -webkit-transform: scale(1);
   transform: scale(1);
 }
 
 .scale-up {
   opacity: 0;
+  -webkit-transform: scale(0.5) translateY(20px);
   transform: scale(0.5) translateY(20px);
+  -webkit-transition: opacity var(--duration-slow) var(--ease-smooth),
+              -webkit-transform var(--duration-slow) var(--ease-spring);
   transition: opacity var(--duration-slow) var(--ease-smooth),
               transform var(--duration-slow) var(--ease-spring);
 }
 
 .scale-up.anim-visible {
   opacity: 1;
+  -webkit-transform: scale(1) translateY(0);
   transform: scale(1) translateY(0);
 }
 
@@ -170,9 +197,13 @@
   to { transform: scale(1); opacity: 1; }
 }
 
+@-webkit-keyframes morphIn {
+  0% { -webkit-clip-path: circle(0% at 50% 50%); clip-path: circle(0% at 50% 50%); }
+  100% { -webkit-clip-path: circle(150% at 50% 50%); clip-path: circle(150% at 50% 50%); }
+}
 @keyframes morphIn {
-  0% { clip-path: circle(0% at 50% 50%); }
-  100% { clip-path: circle(150% at 50% 50%); }
+  0% { -webkit-clip-path: circle(0% at 50% 50%); clip-path: circle(0% at 50% 50%); }
+  100% { -webkit-clip-path: circle(150% at 50% 50%); clip-path: circle(150% at 50% 50%); }
 }
 
 @keyframes glowPulse {
@@ -301,13 +332,17 @@
   *,
   *::before,
   *::after {
+    -webkit-animation-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
     animation-iteration-count: 1 !important;
+    -webkit-transition-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
 
   .anim-ready {
     opacity: 1;
+    -webkit-transform: none;
     transform: none;
   }
 }
@@ -315,12 +350,16 @@
 [data-reduced-motion="true"] *,
 [data-reduced-motion="true"] *::before,
 [data-reduced-motion="true"] *::after {
+  -webkit-animation-duration: 0.01ms !important;
   animation-duration: 0.01ms !important;
+  -webkit-animation-iteration-count: 1 !important;
   animation-iteration-count: 1 !important;
+  -webkit-transition-duration: 0.01ms !important;
   transition-duration: 0.01ms !important;
 }
 
 [data-reduced-motion="true"] .anim-ready {
   opacity: 1;
+  -webkit-transform: none;
   transform: none;
 }

@@ -306,14 +306,36 @@ const Slides = {
     return `
       <div style="display:flex;flex-direction:column;gap:var(--space-lg);max-width:700px;margin:0 auto;">
         ${data.examples.map((ex, i) => `
-          <div class="card fade-up delay-${i + 2}" style="position:relative;">
+          <div class="card raw-idea-card fade-up delay-${i + 2}" style="position:relative;" onclick="Slides.toggleOptimizedPrompt(${i})">
             <div style="display:flex;align-items:flex-start;gap:var(--space-md);">
               <span style="font-size:1.5rem;flex-shrink:0;">${ex.emoji}</span>
               <div style="flex:1;">
                 <span class="badge badge-accent" style="margin-bottom:var(--space-sm);">${ex.label}</span>
                 <p class="body-md" style="color:var(--text-secondary);font-style:italic;line-height:1.8;margin-top:0.5rem;">"${ex.raw}"</p>
+                <button class="raw-idea-toggle-btn" onclick="event.stopPropagation();Slides.toggleOptimizedPrompt(${i})" aria-label="Xem prompt tối ưu">
+                  ✨ Xem Prompt tối ưu
+                </button>
               </div>
             </div>
+            ${ex.optimizedPrompt ? `
+              <div class="raw-idea-prompt" id="raw-idea-prompt-${i}">
+                <div class="raw-idea-prompt-inner">
+                  <div style="display:flex;align-items:center;gap:var(--space-xs);margin-bottom:var(--space-sm);">
+                    <span class="badge badge-secondary">🤖 Prompt tối ưu</span>
+                  </div>
+                  <p style="margin:0;">${ex.optimizedPrompt}</p>
+                  <div class="prompt-actions">
+                    <button class="copy-btn" onclick="event.stopPropagation();Utils.copyToClipboard('${ex.optimizedPrompt.replace(/'/g, "\\'").replace(/\n/g, ' ')}');Utils.showToast('Đã copy Prompt!');" aria-label="Copy prompt">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                      Copy Prompt
+                    </button>
+                    <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" class="gemini-link-btn" onclick="event.stopPropagation()" aria-label="Mở Gemini">
+                      🔗 Mở Gemini
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ` : ''}
           </div>
         `).join('')}
       </div>
@@ -452,7 +474,7 @@ const Slides = {
       <div class="grid-2 fade-up delay-2" style="max-width:900px;margin:0 auto;">
         ${data.edits.map((edit, i) => `
           <div class="card scale-in delay-${i + 3}" style="overflow:hidden;">
-            <div class="img-placeholder" style="${edit.src ? `background:url('${edit.src}') center/cover no-repeat;` : `background:${edit.gradient};`}aspect-ratio:16/10;margin:-var(--space-xl);margin-bottom:var(--space-lg);margin-top:calc(-1 * var(--space-xl));border-radius:var(--radius-lg) var(--radius-lg) 0 0;">
+            <div class="img-placeholder" style="${edit.src ? `background:url('${edit.src}') center/cover no-repeat;` : `background:${edit.gradient};`}aspect-ratio:16/10;margin-left:calc(-1 * var(--space-xl));margin-right:calc(-1 * var(--space-xl));margin-top:calc(-1 * var(--space-xl));margin-bottom:var(--space-lg);border-radius:var(--radius-lg) var(--radius-lg) 0 0;">
               ${!edit.src ? `<span style="font-size:2.5rem;display:flex;align-items:center;justify-content:center;height:100%;">${edit.icon}</span>` : ''}
             </div>
             <h4 class="heading-4" style="margin-top:var(--space-md);margin-bottom:var(--space-sm);">${edit.title}</h4>
@@ -548,6 +570,22 @@ const Slides = {
         </div>
       </div>
     `;
+  },
+
+  // Toggle optimized prompt visibility on raw idea cards
+  toggleOptimizedPrompt(index) {
+    const promptEl = document.getElementById(`raw-idea-prompt-${index}`);
+    if (!promptEl) return;
+    promptEl.classList.toggle('expanded');
+
+    // Update button text
+    const card = promptEl.closest('.raw-idea-card');
+    if (card) {
+      const btn = card.querySelector('.raw-idea-toggle-btn');
+      if (btn) {
+        btn.textContent = promptEl.classList.contains('expanded') ? '▲ Ẩn Prompt' : '✨ Xem Prompt tối ưu';
+      }
+    }
   }
 };
 

@@ -137,17 +137,20 @@ const SLIDES_DATA = [
         {
           raw: 'Mình muốn một tấm ảnh người mẫu nữ mặc áo dài, đứng bên hồ, hoàng hôn, đẹp lãng mạn.',
           label: 'Ý tưởng thô',
-          emoji: '💬'
+          emoji: '💬',
+          optimizedPrompt: 'A Vietnamese woman wearing a traditional white áo dài with delicate floral embroidery, standing gracefully by the edge of a serene lake at golden hour. Soft warm sunlight bathes the scene, creating long shadows and golden reflections on the calm water. Shot from a low angle, shallow depth of field, f/1.8. Background: misty mountains and willow trees. Cinematic color grading with warm amber tones. Ultra-realistic, 8K resolution, professional fashion photography, editorial style.'
         },
         {
           raw: 'Cần poster quảng cáo cà phê, phong cách vintage, ấm áp, có ly cà phê bốc khói.',
           label: 'Ý tưởng thô',
-          emoji: '☕'
+          emoji: '☕',
+          optimizedPrompt: 'A premium vintage coffee advertisement: a handcrafted ceramic cup of steaming Vietnamese egg coffee with thick creamy foam, placed on a dark walnut wooden table. Warm golden lighting from an antique Edison bulb overhead. Background: cozy Hanoi café interior with exposed brick walls, old film posters, and bokeh warm lights. Cinnamon sticks and roasted coffee beans scattered artfully. Shot at 45-degree angle, 85mm macro, f/2.8. Warm muted color palette, nostalgic mood, commercial product photography.'
         },
         {
           raw: 'Muốn video ngắn sản phẩm son môi, quay cận cảnh, ánh sáng studio, sang trọng.',
           label: 'Ý tưởng thô',
-          emoji: '💄'
+          emoji: '💄',
+          optimizedPrompt: 'Cinematic product video: a luxury rose gold lipstick tube slowly rotating on a reflective black surface. Camera starts wide, dollying in to extreme close-up. Rich crimson red bullet catches dramatic studio lighting, creating prismatic reflections. Smoke tendrils rise and swirl in slow motion. Two rim lights with soft diffusion. Background gradient from deep burgundy to blush pink. Slow motion 120fps, 4K resolution, beauty commercial style, Phase One quality.'
         }
       ]
     },

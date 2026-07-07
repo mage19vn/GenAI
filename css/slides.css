@@ -23,11 +23,14 @@
   padding: var(--slide-padding);
   opacity: 0;
   visibility: hidden;
+  -webkit-transform: scale(0.98);
   transform: scale(0.98);
+  -webkit-transition: opacity var(--duration-slow) var(--ease-smooth),
+              -webkit-transform var(--duration-slow) var(--ease-smooth),
+              visibility 0s var(--duration-slow);
   transition: opacity var(--duration-slow) var(--ease-smooth),
               transform var(--duration-slow) var(--ease-smooth),
               visibility 0s var(--duration-slow);
-  contain: content;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
@@ -36,7 +39,11 @@
 .slide.active {
   opacity: 1;
   visibility: visible;
+  -webkit-transform: scale(1);
   transform: scale(1);
+  -webkit-transition: opacity var(--duration-slow) var(--ease-smooth),
+              -webkit-transform var(--duration-slow) var(--ease-smooth),
+              visibility 0s 0s;
   transition: opacity var(--duration-slow) var(--ease-smooth),
               transform var(--duration-slow) var(--ease-smooth),
               visibility 0s 0s;

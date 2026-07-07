@@ -38,21 +38,27 @@ const Animations = {
   },
 
   // Trigger animations for a specific slide
+  // Double rAF ensures Edge/Chromium browsers complete layout before triggering transitions
   animateSlide(slideEl) {
     if (!slideEl) return;
 
     const elements = Utils.$$('.fade-up, .fade-down, .fade-left, .fade-right, .scale-in, .scale-up', slideEl);
 
-    // Reset first
-    elements.forEach(el => el.classList.remove('anim-visible'));
+    // Reset first — force reflow for Edge
+    elements.forEach(el => {
+      el.classList.remove('anim-visible');
+      el.style.willChange = 'transform, opacity';
+    });
 
-    // Then stagger reveal
+    // Double rAF: first frame resets, second frame triggers — ensures Edge picks up transition
     requestAnimationFrame(() => {
-      elements.forEach((el, i) => {
-        const delay = el.dataset.delay || (i * 100);
-        setTimeout(() => {
-          el.classList.add('anim-visible');
-        }, delay);
+      requestAnimationFrame(() => {
+        elements.forEach((el, i) => {
+          const delay = el.dataset.delay || (i * 100);
+          setTimeout(() => {
+            el.classList.add('anim-visible');
+          }, delay);
+        });
       });
     });
   },
