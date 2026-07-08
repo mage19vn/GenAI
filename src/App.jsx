@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Tabs from './components/Tabs';
 import Admin from './components/Admin';
 import Footer from './components/Footer';
@@ -37,12 +37,12 @@ const MainLayout = () => (
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<MainLayout />} />
         <Route path="/admin-dashboard" element={<Admin />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
