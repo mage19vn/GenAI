@@ -279,7 +279,7 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
     { 
       step: 'VD1', 
       title: 'Ví dụ thực tế: Kịch bản phim', 
-      example: '💡 Kịch bản: "Từ bức ảnh các đoàn viên thanh niên đang trồng cây, gió nhẹ thổi qua làm lá cây rung rinh. Các đoàn viên đang tươi cười, ánh sáng bình minh dần bừng sáng rực rỡ hơn. Máy quay từ từ tiến lại gần để bắt trọn khoảnh khắc nhiệt huyết này."'
+      example: '💡 Kịch bản: "Dựa trên bức ảnh vừa tạo, phân cảnh mở đầu là một nhóm thanh niên tình nguyện đang trồng cây, nổi bật là cô gái đang đưa tay lau mồ hôi trên trán. Gió buổi sáng thổi nhẹ làm tung bay những lọn tóc và lá cây. Cô gái hạ tay xuống và mỉm cười rạng rỡ, ánh nắng bình minh rực rỡ chiếu qua các tán cây. Máy quay zoom nhẹ vào nụ cười của cô gái."'
     },
     { 
       step: '2', 
@@ -289,8 +289,8 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
     { 
       step: 'VD2', 
       title: 'Ví dụ thực tế: Phân tách chuyển động', 
-      example: '💡 Lệnh nhờ Trợ lý ảo: "Hãy viết câu lệnh tạo video chuyên nghiệp. Phân tách rõ: \n- Bối cảnh: Thanh niên tình nguyện đang trồng cây dưới ánh bình minh.\n- Chuyển động: Gió thổi nhẹ làm lá cây rung rinh, ánh nắng dần rực rỡ, máy quay từ từ tiến lại gần (zoom in) để thấy rõ nụ cười nhiệt huyết."',
-      answer: 'Cinematic video, a group of Vietnamese youth volunteers in blue shirts planting trees during sunrise. Gentle morning breeze making the leaves rustle softly. The golden sunrise light gradually becomes more radiant. Slow camera zoom in, capturing their enthusiastic smiles and teamwork. Hyper-realistic motion, 4k resolution, smooth tracking shot.'
+      example: '💡 Lệnh nhờ Trợ lý ảo: "Hãy viết câu lệnh tạo video chuyên nghiệp. Phân tách rõ: \n- Bối cảnh: Nhóm thanh niên tình nguyện đang làm việc dưới ánh bình minh, nổi bật là một nữ đoàn viên đang đưa tay lau mồ hôi trên trán.\n- Chuyển động: Gió thổi nhẹ làm lá cây và tóc bay lất phất. Nữ đoàn viên hạ tay xuống và mỉm cười. Máy quay từ từ tiến lại gần (slow zoom in) vào nụ cười của cô gái."',
+      answer: 'Cinematic video, high-quality portrait of a Vietnamese youth volunteer girl wiping sweat from her forehead. Gentle morning breeze rustling the leaves and blowing her hair slightly. She lowers her hand and smiles brightly. The golden sunrise light gradually becomes more radiant through the trees. Slow camera zoom in, capturing her enthusiastic expression. Hyper-realistic motion, 4k resolution, smooth tracking shot.'
     },
     { 
       step: '3', 
