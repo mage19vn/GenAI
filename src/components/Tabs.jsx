@@ -170,87 +170,87 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
   const imageSlides = [
     { 
       step: '1', 
-      title: 'Bước 1: Lên ý tưởng', 
-      desc: 'Bạn cần định hình và viết prompt miêu tả rõ ý tưởng hình ảnh/poster trong đầu cho AI hiểu. Càng chi tiết càng tốt.', 
-      details: ['🐶 Ai/Cái gì?', '🏡 Ở đâu?', '🎨 Phong cách nào?', '☀️ Ánh sáng và màu sắc ra sao?']
+      title: 'Bước 1: Lên ý tưởng và Định hình thông điệp', 
+      desc: 'Để máy tính có thể hiểu và tái tạo chính xác bức tranh bạn mong muốn, bước đầu tiên và quan trọng nhất là phải có một ý tưởng thật rõ ràng. Với các hoạt động của Đoàn Thanh niên, bức ảnh cần thể hiện được sự nhiệt huyết, sức trẻ và tinh thần cống hiến. Bạn cần xác định rõ các yếu tố cấu thành: Nhân vật trung tâm là ai? Đang làm hành động gì? Bối cảnh diễn ra ở đâu? Không khí và màu sắc chủ đạo của bức tranh sẽ mang cảm xúc như thế nào?', 
+      details: ['👥 Nhân vật: Đoàn viên, thanh niên, thiếu nhi...', '📍 Bối cảnh: Vùng sâu vùng xa, mặt trận tình nguyện...', '🎨 Phong cách: Chân thực, nghệ thuật, cổ động...', '☀️ Cảm xúc: Tươi sáng, nhiệt huyết, tự hào...']
     },
     { 
-      step: '1.1', 
-      title: 'Ví dụ: Lên ý tưởng', 
-      example: '💡 Ý tưởng ban đầu: "Một chiến binh đứng trên núi tuyết nhìn xuống thành phố tương lai rực rỡ ánh đèn neon dưới thung lũng, phong cách cyberpunk, ánh sáng hoàng hôn."'
+      step: 'VD1', 
+      title: 'Ví dụ thực tế: Lên ý tưởng', 
+      example: '💡 Ý tưởng sơ phác: "Một nhóm đoàn viên thanh niên mặc áo xanh tình nguyện đang hăng hái trồng cây xanh tại một miền quê yên bình vào buổi sáng sớm. Ánh nắng ban mai rực rỡ chiếu xuống, thể hiện sức sống tuổi trẻ và tinh thần chung tay bảo vệ môi trường xanh - sạch - đẹp."'
     },
     { 
       step: '2', 
-      title: 'Bước 2: Tạo prompt tiêu chuẩn', 
-      desc: 'Nhờ một AI ngôn ngữ (như ChatGPT hoặc Gemini) để giúp bạn nâng cấp ý tưởng thành một prompt tiêu chuẩn, thật chuyên nghiệp nhưng vẫn bám sát ý tưởng gốc.', 
+      title: 'Bước 2: Chuyển đổi ý tưởng thành câu lệnh chuẩn', 
+      desc: 'Máy tính xử lý hình ảnh dựa trên các "câu lệnh". Vì hầu hết các hệ thống trí tuệ nhân tạo tạo ảnh tiên tiến hiện nay đều hoạt động tốt nhất với dữ liệu ngoại ngữ, chúng ta nên sử dụng một công cụ xử lý ngôn ngữ (như Gemini) để biên dịch và trau chuốt lại ý tưởng tiếng Việt. Hệ thống ngôn ngữ sẽ giúp tối ưu hóa từ vựng, thêm các thuật ngữ nhiếp ảnh và nghệ thuật chuyên sâu nhằm đảm bảo bức ảnh xuất ra đạt chất lượng cao nhất.', 
     },
     { 
-      step: '2.1', 
-      title: 'Ví dụ: Tạo prompt tiêu chuẩn', 
-      example: '💡 Lệnh nhờ Gemini: "Hãy đóng vai một chuyên gia đồ họa. Viết cho tôi một prompt tiếng Anh thật chuyên nghiệp cho Midjourney, bám sát ý tưởng sau: Một chiến binh đứng trên núi tuyết nhìn xuống thành phố cyberpunk..."'
+      step: 'VD2', 
+      title: 'Ví dụ thực tế: Câu lệnh chuẩn', 
+      example: '💡 Lệnh nhờ Trợ lý ảo: "Tôi muốn tạo một bức ảnh về Đoàn Thanh niên. Hãy đóng vai một chuyên gia đồ họa, dịch và tối ưu ý tưởng sau sang tiếng Anh để hệ thống vẽ tranh hiểu tốt nhất: Một nhóm thanh niên mặc áo sơ mi xanh Đoàn đang trồng cây dưới ánh nắng bình minh, phong cách nhiếp ảnh chân thực, sắc nét."'
     },
     { 
       step: '3', 
-      title: 'Bước 3: Cung cấp tư liệu thêm', 
-      desc: 'Bạn có thể cung cấp các tư liệu thêm cho AI như hình ảnh (ảnh chân dung thật, ảnh bố cục mẫu), thông tin, hoặc tài liệu (Image-to-Image) để AI vẽ bám sát yêu cầu thực tế hơn.', 
+      title: 'Bước 3: Sử dụng tư liệu tham khảo gốc', 
+      desc: 'Đôi khi, việc mô tả bằng lời nói là chưa đủ để diễn tả hết sự độc đáo của một khoảnh khắc. Bạn hoàn toàn có thể cung cấp cho hệ thống trí tuệ nhân tạo một bức ảnh có sẵn làm tài liệu tham khảo. Khi có hình ảnh mốc, máy tính có thể phân tích bố cục, đặc điểm khuôn mặt hoặc màu sắc của áo Đoàn để vẽ ra một bức tranh mới bám sát với thực tế phong trào của chi đoàn bạn hơn.', 
     },
     { 
-      step: '3.1', 
-      title: 'Ví dụ: Cung cấp tư liệu', 
-      example: '💡 Bạn tải lên một bức ảnh chụp khuôn mặt bản thân, sau đó gửi kèm prompt tiếng Anh vừa tạo. AI sẽ tạo ra nhân vật cyberpunk mang khuôn mặt của chính bạn.'
+      step: 'VD3', 
+      title: 'Ví dụ thực tế: Dùng tư liệu tham khảo', 
+      example: '💡 Thực hành: Bạn tải lên một bức ảnh chụp tập thể chi đoàn đang tham gia chiến dịch Mùa hè xanh, sau đó yêu cầu hệ thống: "Dựa trên bố cục và trang phục trong bức ảnh này, hãy vẽ lại dưới dạng một bức tranh cổ động nghệ thuật mang màu sắc tươi sáng, rực rỡ."'
     },
     { 
       step: '4', 
-      title: 'Bước 4: Tạo hình và chỉnh sửa', 
-      desc: 'Giao prompt và tư liệu cho công cụ AI tạo ảnh. Nếu bức ảnh có lỗi nhỏ (thừa ngón tay, sai chi tiết), dùng tính năng Inpainting (chỉnh sửa cục bộ) để khoanh vùng và yêu cầu AI sửa lại chỗ đó.', 
+      title: 'Bước 4: Tạo hình và tinh chỉnh chi tiết', 
+      desc: 'Sau khi đưa câu lệnh và tư liệu cho hệ thống xử lý, bạn sẽ nhận được các kết quả đầu tiên. Sẽ có những trường hợp máy tính vẽ chưa chính xác các chi tiết đặc thù, chẳng hạn như huy hiệu Đoàn bị mờ. Đừng vội bỏ cuộc, hãy sử dụng tính năng "Chỉnh sửa cục bộ". Tính năng này cho phép bạn khoanh vùng chính xác phần bị lỗi và yêu cầu máy tính chỉ vẽ lại duy nhất khu vực đó mà không làm hỏng tổng thể bức tranh.', 
     },
     { 
-      step: '4.1', 
-      title: 'Ví dụ: Tạo hình và chỉnh sửa', 
-      example: '💡 Hình AI tạo ra rất đẹp nhưng thanh gươm bị cong. Bạn khoanh vùng thanh gươm và gõ prompt: "A straight, glowing futuristic neon sword" để AI sửa đổi.'
+      step: 'VD4', 
+      title: 'Ví dụ thực tế: Tinh chỉnh chi tiết', 
+      example: '💡 Xử lý lỗi: Bức ảnh tổng thể rất đẹp nhưng huy hiệu Đoàn trên ngực trái áo xanh bị nhòe. Bạn dùng công cụ chỉnh sửa, khoanh tròn vùng ngực trái và gõ thêm một câu lệnh bổ sung cực kỳ ngắn gọn: "Huy hiệu Đoàn Thanh niên Cộng sản Hồ Chí Minh, cờ đỏ sao vàng rõ nét".'
     }
   ];
 
   const videoSlides = [
     { 
       step: '1', 
-      title: 'Bước 1: Lên ý tưởng', 
-      desc: 'Bạn cần viết ra một miêu tả thật rõ ràng cho ý tưởng video của mình. Tập trung vào chủ thể, hành động đang diễn ra và sự thay đổi của bối cảnh.', 
+      title: 'Bước 1: Lên kịch bản chi tiết cho đoạn phim', 
+      desc: 'Sản xuất một đoạn phim ngắn yêu cầu sự chuẩn bị kỹ lưỡng hơn so với hình ảnh tĩnh. Bạn cần viết ra một kịch bản rõ ràng, đóng vai trò như một người đạo diễn chỉ đạo diễn xuất. Trong phong trào Đoàn, những đoạn phim thường hướng tới truyền cảm hứng. Do đó, hãy mô tả chi tiết: Hành động bắt đầu như thế nào? Sự vật xung quanh chuyển động ra sao? Khung cảnh biến đổi như thế nào trong vài giây ngắn ngủi đó?', 
     },
     { 
-      step: '1.1', 
-      title: 'Ví dụ: Lên ý tưởng', 
-      example: '💡 Ý tưởng video: "Một phi hành gia đang bước đi chậm rãi trên bề mặt sao Hỏa, cát bụi bay mù mịt theo từng bước chân."'
+      step: 'VD1', 
+      title: 'Ví dụ thực tế: Kịch bản phim', 
+      example: '💡 Kịch bản: "Tại một buổi lễ ra quân chiến dịch thanh niên tình nguyện, một đoàn viên nam đang phất cao lá cờ Đoàn. Gió thổi mạnh làm lá cờ tung bay phấp phới, trong khi phía sau là hàng trăm thanh niên đang đứng nghiêm trang vỗ tay hào hứng."'
     },
     { 
       step: '2', 
-      title: 'Bước 2: Tạo prompt tiêu chuẩn', 
-      desc: 'Cho AI ngôn ngữ tạo ra một prompt tiêu chuẩn chuyên nghiệp cho ý tưởng video, đảm bảo phân chia rõ hình ảnh và các chuyển động của camera (camera motion) bám sát ý tưởng.', 
+      title: 'Bước 2: Phân tách kịch bản hình ảnh và chuyển động', 
+      desc: 'Hệ thống trí tuệ nhân tạo xử lý video cần phân biệt rõ giữa bối cảnh tĩnh và yếu tố động. Bạn hãy sử dụng trợ lý ảo để tách kịch bản của mình thành hai phần: Phần mô tả hình ảnh tĩnh (để xây dựng bối cảnh) và phần mô tả chuyển động máy quay (để tạo cảm giác góc máy điện ảnh). Việc chia nhỏ này giúp hệ thống không bị nhầm lẫn giữa việc nhân vật di chuyển hay máy quay di chuyển.', 
     },
     { 
-      step: '2.1', 
-      title: 'Ví dụ: Tạo prompt tiêu chuẩn', 
-      example: '💡 Lệnh nhờ AI: "Hãy viết prompt tiếng Anh để tạo video trên Runway. Mô tả chi tiết: Astronaut walking slowly on Mars, dust swirling around the boots, cinematic tracking shot."'
+      step: 'VD2', 
+      title: 'Ví dụ thực tế: Phân tách chuyển động', 
+      example: '💡 Lệnh nhờ Trợ lý ảo: "Hãy viết câu lệnh tạo video chuyên nghiệp. Phân tách rõ: \n- Bối cảnh: Thanh niên cầm cờ Đoàn tại lễ ra quân.\n- Chuyển động: Gió thổi cờ bay phấp phới, góc máy quay từ từ lùi lại dần để thấy toàn cảnh đội hình rộng lớn phía sau."'
     },
     { 
       step: '3', 
-      title: 'Bước 3: Tạo ảnh làm khung hình gốc', 
-      desc: 'Liên hệ đến phần Tạo Ảnh trước đó: Thay vì để AI tự làm video từ số 0, hãy dùng công cụ vẽ tạo ra một bức ảnh tĩnh thật ưng ý làm khung hình mở màn (First Frame) cho đoạn phim.', 
+      title: 'Bước 3: Tạo khung hình gốc chất lượng cao', 
+      desc: 'Một bí quyết quan trọng nhất để có video mượt mà, sắc nét là không yêu cầu máy tính tự tạo video từ con số không. Thay vào đó, bạn hãy quay lại các bước ở phần "Tạo Ảnh", tự mình rèn giũa và vẽ ra một bức ảnh tĩnh mở màn thật hoàn mỹ. Bức ảnh này sẽ là điểm tựa vững chắc để phần mềm dựa vào đó mà tiếp tục kéo dài sự chuyển động cho đoạn phim.', 
     },
     { 
-      step: '3.1', 
-      title: 'Ví dụ: Tạo ảnh', 
-      example: '💡 Dùng Midjourney để vẽ ra bức ảnh tĩnh cực kỳ sắc nét về "Phi hành gia đứng trên sao Hỏa", sau đó lưu bức ảnh này về máy.'
+      step: 'VD3', 
+      title: 'Ví dụ thực tế: Tạo khung hình gốc', 
+      example: '💡 Hành động: Dùng công cụ tạo ảnh để vẽ một bức ảnh tuyệt đẹp mô tả "Đoàn viên thanh niên giơ cao ngọn đuốc truyền thống". Bức ảnh có ánh sáng rực rỡ, độ nét cực cao. Bạn lưu bức ảnh này về máy tính để làm nguyên liệu gốc.'
     },
     { 
       step: '4', 
-      title: 'Bước 4: Dùng Ảnh và Prompt tạo Video', 
-      desc: 'Tải bức ảnh vừa tạo (gồm background, nhân vật... ngoài ra có thể bổ sung ảnh thật) vào AI tạo video (Image-to-Video). Nhập prompt để AI làm hình ảnh đó chuyển động thành video hoàn chỉnh.', 
+      title: 'Bước 4: Thổi hồn chuyển động vào bức ảnh', 
+      desc: 'Bây giờ, bạn sẽ đưa bức ảnh gốc tĩnh lặng đó vào trong hệ thống trí tuệ nhân tạo chuyên xử lý video. Kết hợp với đoạn câu lệnh chuyển động đã chuẩn bị ở Bước 2, bạn tiến hành căn chỉnh thêm mức độ di chuyển của máy quay. Máy tính sẽ phân tích các điểm ảnh và "thổi hồn", biến khoảnh khắc đứng im thành một đoạn phim sống động, lưu giữ những hình ảnh hào hùng nhất của thanh niên.', 
     },
     { 
-      step: '4.1', 
-      title: 'Ví dụ: Dùng ảnh và prompt tạo video', 
-      example: '💡 Tải ảnh phi hành gia lên công cụ Video. Thiết lập Camera đi theo nhân vật, dán prompt: "Slow walking motion, dust particles flying, cinematic lighting". Bấm Generate!'
+      step: 'VD4', 
+      title: 'Ví dụ thực tế: Hoàn thiện video', 
+      example: '💡 Thao tác cuối: Tải ảnh người thanh niên cầm đuốc lên hệ thống. Gắn kèm câu lệnh chuyển động: "Ngọn lửa trên đuốc cháy bập bùng, tàn lửa bay nhẹ trong không trung, máy quay xoay vòng chậm rãi quanh nhân vật". Nhấn nút Tạo và chờ đón thành quả nghệ thuật của tuổi trẻ!'
     }
   ];
 
