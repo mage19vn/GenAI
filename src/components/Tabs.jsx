@@ -307,6 +307,13 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
       step: '4', 
       title: 'Bước 4: Thổi hồn chuyển động vào bức ảnh', 
       desc: 'Bây giờ, bạn sẽ đưa bức ảnh gốc tĩnh lặng đó vào trong hệ thống trí tuệ nhân tạo chuyên xử lý video. Kết hợp với đoạn câu lệnh chuyển động đã chuẩn bị ở Bước 2, bạn tiến hành căn chỉnh thêm mức độ di chuyển của máy quay. Máy tính sẽ phân tích các điểm ảnh và "thổi hồn", biến khoảnh khắc đứng im thành một đoạn phim sống động, lưu giữ những hình ảnh hào hùng nhất của thanh niên.', 
+    },
+    { 
+      step: 'VD4', 
+      title: 'Ví dụ thực tế: Hoàn thiện video', 
+      example: '💡 Thao tác cuối: Tải bức ảnh tĩnh (cô gái lau mồ hôi) lên hệ thống. Gắn kèm câu lệnh chuyển động tiếng Anh đã chuẩn bị ở VD2. Nhấn nút Tạo và chờ đón thước phim sống động của tuổi trẻ!',
+      answer: 'Cinematic video, high-quality portrait of a Vietnamese youth volunteer girl wiping sweat from her forehead. Gentle morning breeze rustling the leaves and blowing her hair slightly. She lowers her hand and smiles brightly. The golden sunrise light gradually becomes more radiant through the trees. Slow camera zoom in, capturing her enthusiastic expression. Hyper-realistic motion, 4k resolution, smooth tracking shot.',
+      image: ''
     }
   ];
 
