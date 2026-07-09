@@ -132,6 +132,19 @@ const SlideShow = ({ title, slides, mode, setMode }) => {
                 </p>
               </div>
             )}
+            {slide.answer && (
+              <div className="bg-zinc-900/80 border border-emerald-500/30 rounded-xl md:rounded-2xl p-5 md:p-6 mt-4 w-full max-w-4xl border-l-4 border-l-emerald-500 shadow-xl relative overflow-hidden">
+                <p className="text-sm md:text-base text-emerald-100/90 font-mono whitespace-pre-wrap relative z-10">
+                  <span className="font-bold text-emerald-400 mb-2 block">🎯 Kết quả mẫu:</span>
+                  {slide.answer}
+                </p>
+              </div>
+            )}
+            {slide.image && (
+              <div className="mt-4 w-full max-w-4xl rounded-xl overflow-hidden border border-zinc-700/50 shadow-2xl relative flex justify-center bg-zinc-900/50 py-4">
+                <img src={slide.image} alt="Ví dụ minh họa" className="max-w-full max-h-[400px] object-contain rounded-lg shadow-lg" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -169,88 +182,100 @@ const SlideShow = ({ title, slides, mode, setMode }) => {
 const GuideWrapper = ({ activeTab, setActiveTab }) => {
   const imageSlides = [
     { 
-      step: '1', 
+      step: 'A1', 
       title: 'Bước 1: Lên ý tưởng và Định hình thông điệp', 
       desc: 'Để máy tính có thể hiểu và tái tạo chính xác bức tranh bạn mong muốn, bước đầu tiên và quan trọng nhất là phải có một ý tưởng thật rõ ràng. Với các hoạt động của Đoàn Thanh niên, bức ảnh cần thể hiện được sự nhiệt huyết, sức trẻ và tinh thần cống hiến. Bạn cần xác định rõ các yếu tố cấu thành: Nhân vật trung tâm là ai? Đang làm hành động gì? Bối cảnh diễn ra ở đâu? Không khí và màu sắc chủ đạo của bức tranh sẽ mang cảm xúc như thế nào?', 
       details: ['👥 Nhân vật: Đoàn viên, thanh niên, thiếu nhi...', '📍 Bối cảnh: Vùng sâu vùng xa, mặt trận tình nguyện...', '🎨 Phong cách: Chân thực, nghệ thuật, cổ động...', '☀️ Cảm xúc: Tươi sáng, nhiệt huyết, tự hào...']
     },
     { 
-      step: 'VD1', 
+      step: 'A-VD1', 
       title: 'Ví dụ thực tế: Lên ý tưởng', 
       example: '💡 Ý tưởng sơ phác: "Một nhóm đoàn viên thanh niên mặc áo xanh tình nguyện đang hăng hái trồng cây xanh tại một miền quê yên bình vào buổi sáng sớm. Ánh nắng ban mai rực rỡ chiếu xuống, thể hiện sức sống tuổi trẻ và tinh thần chung tay bảo vệ môi trường xanh - sạch - đẹp."'
     },
     { 
-      step: '2', 
+      step: 'A2', 
       title: 'Bước 2: Chuyển đổi ý tưởng thành câu lệnh chuẩn', 
       desc: 'Máy tính xử lý hình ảnh dựa trên các "câu lệnh". Vì hầu hết các hệ thống trí tuệ nhân tạo tạo ảnh tiên tiến hiện nay đều hoạt động tốt nhất với dữ liệu ngoại ngữ, chúng ta nên sử dụng một công cụ xử lý ngôn ngữ (như Gemini) để biên dịch và trau chuốt lại ý tưởng tiếng Việt. Hệ thống ngôn ngữ sẽ giúp tối ưu hóa từ vựng, thêm các thuật ngữ nhiếp ảnh và nghệ thuật chuyên sâu nhằm đảm bảo bức ảnh xuất ra đạt chất lượng cao nhất.', 
     },
     { 
-      step: 'VD2', 
+      step: 'A-VD2', 
       title: 'Ví dụ thực tế: Câu lệnh chuẩn', 
-      example: '💡 Lệnh nhờ Trợ lý ảo: "Tôi muốn tạo một bức ảnh về Đoàn Thanh niên. Hãy đóng vai một chuyên gia đồ họa, dịch và tối ưu ý tưởng sau sang tiếng Anh để hệ thống vẽ tranh hiểu tốt nhất: Một nhóm thanh niên mặc áo sơ mi xanh Đoàn đang trồng cây dưới ánh nắng bình minh, phong cách nhiếp ảnh chân thực, sắc nét."'
+      example: '💡 Lệnh nhờ Trợ lý ảo: "Bạn là một chuyên gia viết prompt cho AI. Hãy viết một prompt bằng tiếng Anh được tối ưu để AI tạo ra hình ảnh bám sát ý tưởng nhất, có chất lượng chuyên nghiệp và giàu chi tiết. Ý tưởng: Một nhóm thanh niên mặc áo sơ mi xanh Đoàn đang trồng cây dưới ánh nắng bình minh, phong cách nhiếp ảnh chân thực, sắc nét." ',
+      answer: 'Create an ultra-realistic documentary-style photograph of a group of Vietnamese youth volunteers wearing the official blue shirts of the Ho Chi Minh Communist Youth Union, working together to plant young trees during sunrise in a lush green natural environment.\nThe scene captures a meaningful community tree-planting campaign. Several young men and women are carefully placing saplings into freshly dug soil, holding shovels, watering the trees, and smiling naturally while cooperating as a team. Their expressions convey enthusiasm, responsibility, hope, and dedication to environmental protection.\nThe warm golden rays of the rising sun illuminate the landscape from a low angle, producing soft volumetric light, cinematic sun flares, realistic shadows, and a peaceful morning atmosphere. Dew remains visible on the grass, creating a fresh and vibrant feeling.\nComposition follows professional photojournalism principles with a balanced arrangement of subjects, strong foreground-midground-background separation, natural depth of field, and leading lines guiding the viewer\'s attention toward the volunteers. The camera is positioned at eye level with a slightly wide-angle perspective to capture both the people and the surrounding scenery.\nThe blue volunteer shirts contrast beautifully against the rich green trees and warm golden sunrise. Clothing appears realistic with natural fabric folds, subtle dirt from planting, and authentic body language.\nStyle: award-winning documentary photography, National Geographic quality, hyper-realistic, photorealistic, HDR, ultra-detailed, 8K resolution, DSLR photography, Canon EOS R5, RF 24-70mm f/2.8L lens, f/4, ISO 100, 1/500s shutter speed, natural color grading, crisp details, cinematic lighting, realistic skin textures, highly detailed hands, anatomically correct, environmental storytelling, authentic Vietnamese setting.\nNegative prompt: low quality, blurry, cartoon, anime, CGI, illustration, painting, oversaturated colors, artificial lighting, unrealistic anatomy, distorted faces, extra limbs, extra fingers, duplicate people, cropped subjects, watermark, text, logo, noise, motion blur, lens distortion, overexposed, underexposed, plastic skin, poorly rendered hands, deformed objects.',
+      image: ''
     },
     { 
-      step: '3', 
+      step: 'A3', 
       title: 'Bước 3: Sử dụng tư liệu tham khảo gốc', 
       desc: 'Đôi khi, việc mô tả bằng lời nói là chưa đủ để diễn tả hết sự độc đáo của một khoảnh khắc. Bạn hoàn toàn có thể cung cấp cho hệ thống trí tuệ nhân tạo một bức ảnh có sẵn làm tài liệu tham khảo. Khi có hình ảnh mốc, máy tính có thể phân tích bố cục, đặc điểm khuôn mặt hoặc màu sắc của áo Đoàn để vẽ ra một bức tranh mới bám sát với thực tế phong trào của chi đoàn bạn hơn.', 
     },
     { 
-      step: 'VD3', 
+      step: 'A-VD3', 
       title: 'Ví dụ thực tế: Dùng tư liệu tham khảo', 
-      example: '💡 Thực hành: Bạn tải lên một bức ảnh chụp tập thể chi đoàn đang tham gia chiến dịch Mùa hè xanh, sau đó yêu cầu hệ thống: "Dựa trên bố cục và trang phục trong bức ảnh này, hãy vẽ lại dưới dạng một bức tranh cổ động nghệ thuật mang màu sắc tươi sáng, rực rỡ."'
+      example: '💡 Thực hành: Bạn tải lên một bức ảnh chụp tập thể chi đoàn đang tham gia chiến dịch Mùa hè xanh, sau đó yêu cầu hệ thống: "Dựa trên bố cục và trang phục trong bức ảnh này, hãy vẽ lại dưới dạng một bức tranh cổ động nghệ thuật mang màu sắc tươi sáng, rực rỡ."',
+      answer: 'Hệ thống sẽ giữ lại cấu trúc bức ảnh gốc của bạn và áp dụng bộ lọc nghệ thuật cổ động lên, biến bức ảnh chụp thông thường thành một tác phẩm nghệ thuật số đầy cảm hứng.',
+      image: ''
     },
     { 
-      step: '4', 
+      step: 'A4', 
       title: 'Bước 4: Tạo hình và tinh chỉnh chi tiết', 
       desc: 'Sau khi đưa câu lệnh và tư liệu cho hệ thống xử lý, bạn sẽ nhận được các kết quả đầu tiên. Sẽ có những trường hợp máy tính vẽ chưa chính xác các chi tiết đặc thù, chẳng hạn như huy hiệu Đoàn bị mờ. Đừng vội bỏ cuộc, hãy sử dụng tính năng "Chỉnh sửa cục bộ". Tính năng này cho phép bạn khoanh vùng chính xác phần bị lỗi và yêu cầu máy tính chỉ vẽ lại duy nhất khu vực đó mà không làm hỏng tổng thể bức tranh.', 
     },
     { 
-      step: 'VD4', 
+      step: 'A-VD4', 
       title: 'Ví dụ thực tế: Tinh chỉnh chi tiết', 
-      example: '💡 Xử lý lỗi: Bức ảnh tổng thể rất đẹp nhưng huy hiệu Đoàn trên ngực trái áo xanh bị nhòe. Bạn dùng công cụ chỉnh sửa, khoanh tròn vùng ngực trái và gõ thêm một câu lệnh bổ sung cực kỳ ngắn gọn: "Huy hiệu Đoàn Thanh niên Cộng sản Hồ Chí Minh, cờ đỏ sao vàng rõ nét".'
+      example: '💡 Xử lý lỗi: Bức ảnh tổng thể rất đẹp nhưng huy hiệu Đoàn trên ngực trái áo xanh bị nhòe. Bạn dùng công cụ chỉnh sửa, khoanh tròn vùng ngực trái và gõ thêm một câu lệnh bổ sung cực kỳ ngắn gọn: "Huy hiệu Đoàn Thanh niên Cộng sản Hồ Chí Minh, cờ đỏ sao vàng rõ nét".',
+      answer: 'A highly detailed, perfectly shaped badge of the Ho Chi Minh Communist Youth Union on the left chest of the blue shirt. The text "Đoàn Thanh niên Cộng sản Hồ Chí Minh" is crisp and legible. The red flag with a yellow star is vibrant and accurately depicted. Photorealistic texture.',
+      image: ''
     }
   ];
 
   const videoSlides = [
     { 
-      step: '1', 
+      step: 'V1', 
       title: 'Bước 1: Lên kịch bản chi tiết cho đoạn phim', 
       desc: 'Sản xuất một đoạn phim ngắn yêu cầu sự chuẩn bị kỹ lưỡng hơn so với hình ảnh tĩnh. Bạn cần viết ra một kịch bản rõ ràng, đóng vai trò như một người đạo diễn chỉ đạo diễn xuất. Trong phong trào Đoàn, những đoạn phim thường hướng tới truyền cảm hứng. Do đó, hãy mô tả chi tiết: Hành động bắt đầu như thế nào? Sự vật xung quanh chuyển động ra sao? Khung cảnh biến đổi như thế nào trong vài giây ngắn ngủi đó?', 
     },
     { 
-      step: 'VD1', 
+      step: 'V-VD1', 
       title: 'Ví dụ thực tế: Kịch bản phim', 
       example: '💡 Kịch bản: "Tại một buổi lễ ra quân chiến dịch thanh niên tình nguyện, một đoàn viên nam đang phất cao lá cờ Đoàn. Gió thổi mạnh làm lá cờ tung bay phấp phới, trong khi phía sau là hàng trăm thanh niên đang đứng nghiêm trang vỗ tay hào hứng."'
     },
     { 
-      step: '2', 
+      step: 'V2', 
       title: 'Bước 2: Phân tách kịch bản hình ảnh và chuyển động', 
       desc: 'Hệ thống trí tuệ nhân tạo xử lý video cần phân biệt rõ giữa bối cảnh tĩnh và yếu tố động. Bạn hãy sử dụng trợ lý ảo để tách kịch bản của mình thành hai phần: Phần mô tả hình ảnh tĩnh (để xây dựng bối cảnh) và phần mô tả chuyển động máy quay (để tạo cảm giác góc máy điện ảnh). Việc chia nhỏ này giúp hệ thống không bị nhầm lẫn giữa việc nhân vật di chuyển hay máy quay di chuyển.', 
     },
     { 
-      step: 'VD2', 
+      step: 'V-VD2', 
       title: 'Ví dụ thực tế: Phân tách chuyển động', 
-      example: '💡 Lệnh nhờ Trợ lý ảo: "Hãy viết câu lệnh tạo video chuyên nghiệp. Phân tách rõ: \n- Bối cảnh: Thanh niên cầm cờ Đoàn tại lễ ra quân.\n- Chuyển động: Gió thổi cờ bay phấp phới, góc máy quay từ từ lùi lại dần để thấy toàn cảnh đội hình rộng lớn phía sau."'
+      example: '💡 Lệnh nhờ Trợ lý ảo: "Hãy viết câu lệnh tạo video chuyên nghiệp. Phân tách rõ: \n- Bối cảnh: Thanh niên cầm cờ Đoàn tại lễ ra quân.\n- Chuyển động: Gió thổi cờ bay phấp phới, góc máy quay từ từ lùi lại dần để thấy toàn cảnh đội hình rộng lớn phía sau."',
+      answer: 'Cinematic video, wide establishing shot of a youth union volunteer campaign ceremony. A young Vietnamese man is waving the Ho Chi Minh Communist Youth Union flag. The wind blows strongly, making the flag flap majestically. Hundreds of youth volunteers in blue shirts are standing in formation in the background clapping. The camera slowly zooms out and tracks backward to reveal the massive scale of the energetic formation. Cinematic lighting, hyper-realistic motion, 4k resolution, smooth tracking shot.',
+      image: ''
     },
     { 
-      step: '3', 
+      step: 'V3', 
       title: 'Bước 3: Tạo khung hình gốc chất lượng cao', 
       desc: 'Một bí quyết quan trọng nhất để có video mượt mà, sắc nét là không yêu cầu máy tính tự tạo video từ con số không. Thay vào đó, bạn hãy quay lại các bước ở phần "Tạo Ảnh", tự mình rèn giũa và vẽ ra một bức ảnh tĩnh mở màn thật hoàn mỹ. Bức ảnh này sẽ là điểm tựa vững chắc để phần mềm dựa vào đó mà tiếp tục kéo dài sự chuyển động cho đoạn phim.', 
     },
     { 
-      step: 'VD3', 
+      step: 'V-VD3', 
       title: 'Ví dụ thực tế: Tạo khung hình gốc', 
-      example: '💡 Hành động: Dùng công cụ tạo ảnh để vẽ một bức ảnh tuyệt đẹp mô tả "Đoàn viên thanh niên giơ cao ngọn đuốc truyền thống". Bức ảnh có ánh sáng rực rỡ, độ nét cực cao. Bạn lưu bức ảnh này về máy tính để làm nguyên liệu gốc.'
+      example: '💡 Hành động: Dùng công cụ tạo ảnh để vẽ một bức ảnh tuyệt đẹp mô tả "Đoàn viên thanh niên giơ cao ngọn đuốc truyền thống". Bức ảnh có ánh sáng rực rỡ, độ nét cực cao. Bạn lưu bức ảnh này về máy tính để làm nguyên liệu gốc.',
+      answer: 'Hệ thống sẽ kết xuất ra một bức ảnh tĩnh với độ chi tiết cao, thể hiện rõ ánh sáng bập bùng của ngọn đuốc và khuôn mặt quyết tâm của người thanh niên, sẵn sàng làm nền tảng cho video.',
+      image: ''
     },
     { 
-      step: '4', 
+      step: 'V4', 
       title: 'Bước 4: Thổi hồn chuyển động vào bức ảnh', 
       desc: 'Bây giờ, bạn sẽ đưa bức ảnh gốc tĩnh lặng đó vào trong hệ thống trí tuệ nhân tạo chuyên xử lý video. Kết hợp với đoạn câu lệnh chuyển động đã chuẩn bị ở Bước 2, bạn tiến hành căn chỉnh thêm mức độ di chuyển của máy quay. Máy tính sẽ phân tích các điểm ảnh và "thổi hồn", biến khoảnh khắc đứng im thành một đoạn phim sống động, lưu giữ những hình ảnh hào hùng nhất của thanh niên.', 
     },
     { 
-      step: 'VD4', 
+      step: 'V-VD4', 
       title: 'Ví dụ thực tế: Hoàn thiện video', 
-      example: '💡 Thao tác cuối: Tải ảnh người thanh niên cầm đuốc lên hệ thống. Gắn kèm câu lệnh chuyển động: "Ngọn lửa trên đuốc cháy bập bùng, tàn lửa bay nhẹ trong không trung, máy quay xoay vòng chậm rãi quanh nhân vật". Nhấn nút Tạo và chờ đón thành quả nghệ thuật của tuổi trẻ!'
+      example: '💡 Thao tác cuối: Tải ảnh người thanh niên cầm đuốc lên hệ thống. Gắn kèm câu lệnh chuyển động: "Ngọn lửa trên đuốc cháy bập bùng, tàn lửa bay nhẹ trong không trung, máy quay xoay vòng chậm rãi quanh nhân vật". Nhấn nút Tạo và chờ đón thành quả nghệ thuật của tuổi trẻ!',
+      answer: 'Close-up tracking shot. A young man holding a traditional flaming torch. The fire burns intensely with realistic flickering. Small embers and sparks float gently into the air, carried by a light breeze. The camera slowly orbits around him, creating a dramatic 3D parallax effect. High quality, 8k resolution, cinematic lighting, photorealistic fire simulation.',
+      image: ''
     }
   ];
 
