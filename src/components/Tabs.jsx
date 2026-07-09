@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-import { Image, Video, Laptop, UserCheck, Sparkles, Wand2, ChevronLeft, ChevronRight, Maximize, Minimize } from 'lucide-react';
+import { Image, Video, Laptop, UserCheck, Sparkles, Wand2, ChevronLeft, ChevronRight, Maximize, Minimize, Copy, Check } from 'lucide-react';
 
 const SlideShow = ({ title, slides, mode, setMode }) => {
   const [current, setCurrent] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
   const containerRef = useRef(null);
 
   const nextSlide = () => {
@@ -18,6 +20,11 @@ const SlideShow = ({ title, slides, mode, setMode }) => {
   useEffect(() => {
     setCurrent(0);
   }, [mode]);
+
+  useEffect(() => {
+    setIsExpanded(false);
+    setIsCopied(false);
+  }, [current, mode]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -137,11 +144,36 @@ const SlideShow = ({ title, slides, mode, setMode }) => {
               </div>
             )}
             {slide.answer && (
-              <div className="bg-zinc-900/80 border border-emerald-500/30 rounded-xl md:rounded-2xl p-5 md:p-6 mt-4 w-full max-w-4xl border-l-4 border-l-emerald-500 shadow-xl relative overflow-hidden">
-                <p className="text-sm md:text-base text-emerald-100/90 font-mono whitespace-pre-wrap relative z-10">
-                  <span className="font-bold text-emerald-400 mb-2 block">🎯 Kết quả mẫu:</span>
-                  {slide.answer}
-                </p>
+              <div className="bg-zinc-900/80 border border-emerald-500/30 rounded-xl md:rounded-2xl p-5 md:p-6 mt-4 w-full max-w-4xl border-l-4 border-l-emerald-500 shadow-xl relative overflow-hidden flex flex-col">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="font-bold text-emerald-400 block">🎯 Kết quả mẫu:</span>
+                  <button 
+                    onClick={() => {
+                      navigator.clipboard.writeText(slide.answer);
+                      setIsCopied(true);
+                      setTimeout(() => setIsCopied(false), 2000);
+                    }}
+                    className="p-1.5 md:px-3 rounded-md hover:bg-emerald-500/20 text-emerald-400 transition-colors flex items-center gap-1.5 text-xs font-semibold border border-emerald-500/20 bg-zinc-900/50"
+                  >
+                    {isCopied ? <><Check className="w-3.5 h-3.5" /> Đã chép</> : <><Copy className="w-3.5 h-3.5" /> Copy</>}
+                  </button>
+                </div>
+                <div className="relative">
+                  <p className={`text-sm md:text-base text-emerald-100/90 font-mono whitespace-pre-wrap relative z-10 transition-all duration-300 ${isExpanded ? '' : 'line-clamp-4'}`}>
+                    {slide.answer}
+                  </p>
+                  {!isExpanded && slide.answer.length > 200 && (
+                    <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-zinc-900/90 to-transparent z-10 pointer-events-none" />
+                  )}
+                </div>
+                {slide.answer.length > 200 && (
+                  <button 
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="mt-2 text-emerald-500 text-sm font-semibold hover:text-emerald-400 transition-colors self-start"
+                  >
+                    {isExpanded ? 'Thu gọn ▲' : 'Xem đầy đủ ▼'}
+                  </button>
+                )}
               </div>
             )}
             {slide.image && (
