@@ -11,6 +11,7 @@ const Footer = () => {
           <li>• Giải 3 HSG tỉnh Bến Tre năm 2023-2024 & 2024-2025.</li>
           <li>• Giải KK HSG tỉnh Vĩnh Long năm 2025-2026.</li>
           <li>• Đội trưởng PVT Bến Tre, Giải nhì Robocon ORC toàn quốc 2025.</li>
+          <li>• Gia sư tại UnicornsEdu.</li>
         </ul>
       </div>
     </footer>

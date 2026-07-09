@@ -294,7 +294,7 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
     },
     { 
       step: '3', 
-      title: 'Bước 3: Tạo khung hình gốc chất lượng cao', 
+      title: 'Bước 3: Tạo khung hình gốc chất lượng cao (nếu dùng ảnh thật có thể bỏ qua)', 
       desc: 'Một bí quyết quan trọng nhất để có video mượt mà, sắc nét là không yêu cầu máy tính tự tạo video từ con số không. Thay vào đó, bạn hãy quay lại các bước ở phần "Tạo Ảnh", tự mình rèn giũa và vẽ ra một bức ảnh tĩnh mở màn thật hoàn mỹ. Bức ảnh này sẽ là điểm tựa vững chắc để phần mềm dựa vào đó mà tiếp tục kéo dài sự chuyển động cho đoạn phim.', 
     },
     { 
@@ -311,7 +311,7 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
     { 
       step: 'VD4', 
       title: 'Ví dụ thực tế: Hoàn thiện video', 
-      example: '💡 Thao tác cuối: Tải bức ảnh tĩnh (cô gái lau mồ hôi) lên hệ thống. Gắn kèm câu lệnh chuyển động tiếng Anh đã chuẩn bị ở VD2. Nhấn nút Tạo và chờ đón thước phim sống động của tuổi trẻ!',
+      example: '💡 Thao tác cuối: Tải bức ảnh tĩnh (hoặc nhiều bức ảnh tĩnh) lên hệ thống. Gắn kèm câu lệnh chuyển động tiếng Anh đã chuẩn bị ở VD2. Nhấn nút Tạo và chờ đón thước phim sống động của tuổi trẻ!',
       answer: 'Cinematic video, high-quality portrait of a Vietnamese youth volunteer girl wiping sweat from her forehead. Gentle morning breeze rustling the leaves and blowing her hair slightly. She lowers her hand and smiles brightly. The golden sunrise light gradually becomes more radiant through the trees. Slow camera zoom in, capturing her enthusiastic expression. Hyper-realistic motion, 4k resolution, smooth tracking shot.',
       image: ''
     }
