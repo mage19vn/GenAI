@@ -1,5 +1,6 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link } from 'react-router-dom';
+import { Shield } from 'lucide-react';
 import Tabs from './components/Tabs';
 import Admin from './components/Admin';
 import Footer from './components/Footer';
@@ -32,6 +33,15 @@ const MainLayout = () => (
     <div className="relative z-10">
       <Footer />
     </div>
+
+    {/* Admin Dashboard Link */}
+    <Link 
+      to="/admin-dashboard"
+      className="fixed bottom-4 left-4 p-2 rounded-full transition-all duration-300 bg-zinc-900/30 text-zinc-600 hover:bg-zinc-800 hover:text-primary-500 z-50 group border border-zinc-800/0 hover:border-zinc-700/50 shadow-lg"
+      title="Admin Dashboard"
+    >
+      <Shield size={16} className="group-hover:scale-110 transition-transform" />
+    </Link>
   </div>
 );
 

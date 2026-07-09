@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import Papa from 'papaparse';
-import { Lock, ShieldAlert, Download, Loader2 } from 'lucide-react';
+import { Lock, ShieldAlert, Download, Loader2, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Admin = () => {
   const [layer1, setLayer1] = useState('');
@@ -72,7 +73,13 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 relative">
+      <Link 
+        to="/"
+        className="absolute top-4 left-4 md:top-6 md:left-6 px-4 py-2 rounded-full bg-zinc-900/50 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 transition-all border border-zinc-800/50 flex items-center gap-2 text-sm font-medium backdrop-blur shadow-lg z-50"
+      >
+        <ArrowLeft size={16} /> Quay lại
+      </Link>
       <div className="w-full max-w-md glass-panel p-8">
         <div className="flex justify-center mb-6">
           <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center text-red-500">
