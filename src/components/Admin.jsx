@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ref, get, child } from 'firebase/database';
 import { db } from '../firebase';
 import Papa from 'papaparse';
-import { Lock, ShieldAlert, Download, Loader2, ArrowLeft } from 'lucide-react';
+import { Lock, ShieldAlert, Download, Loader2, ArrowLeft, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Admin = () => {
@@ -11,6 +11,7 @@ const Admin = () => {
   const [authLevel, setAuthLevel] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [dataList, setDataList] = useState([]);
 
   // Placeholders for demo purposes
   const APP_PASSWORD = 'mage';
@@ -36,64 +37,80 @@ const Admin = () => {
     }
   };
 
-  const handleExportCSV = async () => {
+  const fetchData = async () => {
     setLoading(true);
     try {
-      let data = [];
+      let dataMap = new Map();
       
       // Thử lấy từ Firebase Realtime Database
       try {
         const snapshot = await get(child(ref(db), 'attendance'));
         if (snapshot.exists()) {
           const dbData = snapshot.val();
-          const firebaseFormatted = Object.values(dbData).map(docData => ({
-            'Họ Tên': docData.name || '',
-            'Trường': docData.school || docData.class || '',
-            'Mã Điểm Danh': docData.attendanceCode || docData.studentId || '',
-            'Thời Gian': docData.timestamp ? new Date(docData.timestamp).toLocaleString() : 'N/A'
-          }));
-          data = [...firebaseFormatted];
+          Object.values(dbData).forEach(docData => {
+            const code = docData.attendanceCode || docData.studentId || '';
+            const timestamp = docData.timestamp ? new Date(docData.timestamp).toLocaleString() : 'N/A';
+            const uniqueKey = code + '_' + timestamp; // Khóa duy nhất chống trùng lặp
+            dataMap.set(uniqueKey, {
+              'Họ Tên': docData.name || '',
+              'Trường': docData.school || docData.class || '',
+              'Mã Điểm Danh': code,
+              'Thời Gian': timestamp
+            });
+          });
         }
       } catch (err) {
-        console.warn("Lỗi tải từ Firebase, dùng dữ liệu dự phòng:", err);
+        console.warn("Lỗi tải từ Firebase:", err);
       }
 
-      // Lấy thêm từ LocalStorage dự phòng (nếu Firebase bị lỗi hoặc thiếu)
+      // Lấy thêm từ LocalStorage dự phòng, lọc bỏ trùng lặp
       try {
         const localData = JSON.parse(localStorage.getItem('attendance_fallback') || '[]');
-        const localFormatted = localData.map(doc => ({
-          'Họ Tên': doc.name || '',
-          'Trường': doc.school || '',
-          'Mã Điểm Danh': doc.attendanceCode || '',
-          'Thời Gian': new Date(doc.timestamp).toLocaleString() || 'N/A'
-        }));
-        
-        // Nối dữ liệu
-        data = [...data, ...localFormatted];
+        localData.forEach(doc => {
+          const code = doc.attendanceCode || '';
+          const timestamp = doc.timestamp ? new Date(doc.timestamp).toLocaleString() : 'N/A';
+          const uniqueKey = code + '_' + timestamp;
+          if (!dataMap.has(uniqueKey)) {
+            dataMap.set(uniqueKey, {
+              'Họ Tên': doc.name || '',
+              'Trường': doc.school || '',
+              'Mã Điểm Danh': code,
+              'Thời Gian': timestamp
+            });
+          }
+        });
       } catch (e) {
         console.error("Lỗi tải LocalStorage:", e);
       }
 
-      if (data.length === 0) {
-        alert("Không có dữ liệu điểm danh.");
-        setLoading(false);
-        return;
-      }
-
-      const csv = Papa.unparse(data);
-      const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'attendance.csv';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      setDataList(Array.from(dataMap.values()).reverse());
     } catch (err) {
       console.error("Error fetching data:", err);
-      alert("Lỗi xuất dữ liệu: " + err.message);
+      setError("Lỗi lấy dữ liệu: " + err.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    if (authLevel === 2) {
+      fetchData();
+    }
+  }, [authLevel]);
+
+  const handleExportCSV = () => {
+    if (dataList.length === 0) {
+      alert("Không có dữ liệu điểm danh.");
+      return;
+    }
+    const csv = Papa.unparse(dataList);
+    const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'attendance.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -104,7 +121,7 @@ const Admin = () => {
       >
         <ArrowLeft size={16} /> Quay lại
       </Link>
-      <div className="w-full max-w-md glass-panel p-8">
+      <div className={`w-full glass-panel p-6 sm:p-8 transition-all duration-500 ${authLevel === 2 ? 'max-w-3xl' : 'max-w-md'}`}>
         <div className="flex justify-center mb-6">
           <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center text-red-500">
             {authLevel === 0 ? <Lock size={32} /> : <ShieldAlert size={32} />}
@@ -159,18 +176,65 @@ const Admin = () => {
 
         {authLevel === 2 && (
           <div className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-            <div className="p-4 bg-primary-500/10 border border-primary-500/30 rounded-xl text-center">
-              <p className="text-primary-400 mb-1 font-medium">Access Granted</p>
-              <p className="text-sm text-zinc-400">You have full administrative privileges.</p>
+            <div className="p-4 bg-primary-500/10 border border-primary-500/30 rounded-xl flex items-center justify-between">
+              <div>
+                <p className="text-primary-400 font-bold text-lg">Quản Trị Viên</p>
+                <p className="text-sm text-zinc-400 mt-1">Tổng số: <span className="text-white font-bold">{dataList.length}</span> lượt điểm danh</p>
+              </div>
+              <button 
+                onClick={fetchData} 
+                className="p-3 bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700/50 hover:border-primary-500/50 hover:text-primary-400 rounded-xl text-zinc-400 transition-all shadow-md group"
+                title="Làm mới dữ liệu"
+              >
+                <RefreshCw size={20} className={loading ? "animate-spin text-primary-500" : "group-hover:-rotate-180 transition-transform duration-500"} />
+              </button>
+            </div>
+            
+            <div className="bg-zinc-950/80 border border-zinc-800/80 rounded-xl shadow-inner max-h-[450px] overflow-hidden flex flex-col relative">
+              {loading && dataList.length === 0 ? (
+                <div className="flex flex-col items-center justify-center p-12 text-zinc-500 h-64">
+                  <Loader2 className="animate-spin mb-4 text-primary-500" size={32} />
+                  <p className="text-sm font-medium">Đang tải dữ liệu...</p>
+                </div>
+              ) : dataList.length === 0 ? (
+                <div className="p-12 text-center text-zinc-500 text-sm h-64 flex items-center justify-center">
+                  Chưa có dữ liệu điểm danh nào.
+                </div>
+              ) : (
+                <div className="overflow-auto custom-scrollbar flex-1">
+                  <table className="w-full text-left text-sm whitespace-nowrap min-w-[600px]">
+                    <thead className="bg-zinc-900/90 text-zinc-400 sticky top-0 backdrop-blur z-10 shadow-sm border-b border-zinc-800">
+                      <tr>
+                        <th className="px-5 py-4 font-semibold tracking-wider uppercase text-xs">Họ Tên</th>
+                        <th className="px-5 py-4 font-semibold tracking-wider uppercase text-xs">Trường</th>
+                        <th className="px-5 py-4 font-semibold tracking-wider uppercase text-xs">Mã Điểm Danh</th>
+                        <th className="px-5 py-4 font-semibold tracking-wider uppercase text-xs">Thời Gian</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-zinc-800/50 text-zinc-300">
+                      {dataList.map((row, idx) => (
+                        <tr key={idx} className="hover:bg-zinc-800/40 transition-colors group">
+                          <td className="px-5 py-4 font-medium text-primary-200">{row['Họ Tên']}</td>
+                          <td className="px-5 py-4 text-zinc-400">{row['Trường']}</td>
+                          <td className="px-5 py-4">
+                            <span className="font-mono text-xs uppercase bg-zinc-900 border border-zinc-800 px-2 py-1 rounded text-zinc-300 group-hover:border-primary-500/30 transition-colors">{row['Mã Điểm Danh']}</span>
+                          </td>
+                          <td className="px-5 py-4 text-zinc-500 text-xs">{row['Thời Gian']}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
             
             <button 
               onClick={handleExportCSV}
-              disabled={loading}
-              className="btn-primary w-full flex items-center justify-center gap-2"
+              disabled={loading || dataList.length === 0}
+              className="btn-primary w-full flex items-center justify-center gap-3 py-4 text-lg mt-4 shadow-[0_0_20px_rgba(20,184,166,0.15)] disabled:shadow-none"
             >
-              {loading ? <Loader2 className="animate-spin" /> : <Download size={20} />}
-              Xuất CSV Điểm Danh
+              <Download size={22} className={loading ? "opacity-50" : ""} /> 
+              {loading ? "Đang xuất..." : "Xuất file CSV"}
             </button>
           </div>
         )}
