@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { ref, get, child } from 'firebase/database';
 import { db } from '../firebase';
 import Papa from 'papaparse';
 import { Lock, ShieldAlert, Download, Loader2, ArrowLeft } from 'lucide-react';
@@ -41,18 +41,19 @@ const Admin = () => {
     try {
       let data = [];
       
-      // Thử lấy từ Firebase
+      // Thử lấy từ Firebase Realtime Database
       try {
-        const querySnapshot = await getDocs(collection(db, 'attendance'));
-        data = querySnapshot.docs.map(doc => {
-          const docData = doc.data();
-          return {
+        const snapshot = await get(child(ref(db), 'attendance'));
+        if (snapshot.exists()) {
+          const dbData = snapshot.val();
+          const firebaseFormatted = Object.values(dbData).map(docData => ({
             'Họ Tên': docData.name || '',
             'Trường': docData.school || docData.class || '',
             'Mã Điểm Danh': docData.attendanceCode || docData.studentId || '',
-            'Thời Gian': docData.timestamp?.toDate().toLocaleString() || 'N/A'
-          };
-        });
+            'Thời Gian': docData.timestamp ? new Date(docData.timestamp).toLocaleString() : 'N/A'
+          }));
+          data = [...firebaseFormatted];
+        }
       } catch (err) {
         console.warn("Lỗi tải từ Firebase, dùng dữ liệu dự phòng:", err);
       }

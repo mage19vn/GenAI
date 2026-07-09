@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
+import { ref, push } from 'firebase/database';
 import { db } from '../firebase';
 import { Image, Video, Laptop, UserCheck, Sparkles, Wand2, ChevronLeft, ChevronRight, Maximize, Minimize, Copy, Check } from 'lucide-react';
 
@@ -331,10 +331,10 @@ const Attendance = () => {
     e.preventDefault();
     setStatus('submitting');
     
-    // Gửi ngầm lên Firebase, không bắt UI phải chờ đợi nếu Firebase bị lỗi/treo
-    addDoc(collection(db, 'attendance'), {
+    // Gửi ngầm lên Firebase Realtime Database
+    push(ref(db, 'attendance'), {
       ...formData,
-      timestamp: new Date()
+      timestamp: new Date().toISOString()
     }).catch(error => {
       console.error("Firebase error: ", error);
     });
