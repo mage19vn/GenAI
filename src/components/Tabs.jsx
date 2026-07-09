@@ -279,7 +279,7 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
     { 
       step: 'VD1', 
       title: 'Ví dụ thực tế: Kịch bản phim', 
-      example: '💡 Kịch bản: "Tại một buổi lễ ra quân chiến dịch thanh niên tình nguyện, một đoàn viên nam đang phất cao lá cờ Đoàn. Gió thổi mạnh làm lá cờ tung bay phấp phới, trong khi phía sau là hàng trăm thanh niên đang đứng nghiêm trang vỗ tay hào hứng."'
+      example: '💡 Kịch bản: "Từ bức ảnh các đoàn viên thanh niên đang trồng cây, gió nhẹ thổi qua làm lá cây rung rinh. Các đoàn viên đang tươi cười, ánh sáng bình minh dần bừng sáng rực rỡ hơn. Máy quay từ từ tiến lại gần để bắt trọn khoảnh khắc nhiệt huyết này."'
     },
     { 
       step: '2', 
@@ -289,9 +289,8 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
     { 
       step: 'VD2', 
       title: 'Ví dụ thực tế: Phân tách chuyển động', 
-      example: '💡 Lệnh nhờ Trợ lý ảo: "Hãy viết câu lệnh tạo video chuyên nghiệp. Phân tách rõ: \n- Bối cảnh: Thanh niên cầm cờ Đoàn tại lễ ra quân.\n- Chuyển động: Gió thổi cờ bay phấp phới, góc máy quay từ từ lùi lại dần để thấy toàn cảnh đội hình rộng lớn phía sau."',
-      answer: 'Cinematic video, wide establishing shot of a youth union volunteer campaign ceremony. A young Vietnamese man is waving the Ho Chi Minh Communist Youth Union flag. The wind blows strongly, making the flag flap majestically. Hundreds of youth volunteers in blue shirts are standing in formation in the background clapping. The camera slowly zooms out and tracks backward to reveal the massive scale of the energetic formation. Cinematic lighting, hyper-realistic motion, 4k resolution, smooth tracking shot.',
-      image: ''
+      example: '💡 Lệnh nhờ Trợ lý ảo: "Hãy viết câu lệnh tạo video chuyên nghiệp. Phân tách rõ: \n- Bối cảnh: Thanh niên tình nguyện đang trồng cây dưới ánh bình minh.\n- Chuyển động: Gió thổi nhẹ làm lá cây rung rinh, ánh nắng dần rực rỡ, máy quay từ từ tiến lại gần (zoom in) để thấy rõ nụ cười nhiệt huyết."',
+      answer: 'Cinematic video, a group of Vietnamese youth volunteers in blue shirts planting trees during sunrise. Gentle morning breeze making the leaves rustle softly. The golden sunrise light gradually becomes more radiant. Slow camera zoom in, capturing their enthusiastic smiles and teamwork. Hyper-realistic motion, 4k resolution, smooth tracking shot.'
     },
     { 
       step: '3', 
@@ -300,22 +299,14 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
     },
     { 
       step: 'VD3', 
-      title: 'Ví dụ thực tế: Tạo khung hình gốc', 
-      example: '💡 Hành động: Dùng công cụ tạo ảnh để vẽ một bức ảnh tuyệt đẹp mô tả "Đoàn viên thanh niên giơ cao ngọn đuốc truyền thống". Bức ảnh có ánh sáng rực rỡ, độ nét cực cao. Bạn lưu bức ảnh này về máy tính để làm nguyên liệu gốc.',
-      answer: 'Hệ thống sẽ kết xuất ra một bức ảnh tĩnh với độ chi tiết cao, thể hiện rõ ánh sáng bập bùng của ngọn đuốc và khuôn mặt quyết tâm của người thanh niên, sẵn sàng làm nền tảng cho video.',
-      image: ''
+      title: 'Ví dụ thực tế: Dùng ảnh gốc cho video', 
+      example: '💡 Hành động: Thay vì tạo mới, chúng ta sẽ sử dụng lại bức ảnh tĩnh tuyệt đẹp đã được tinh chỉnh hoàn thiện ở phần "Tạo Ảnh" để làm nguyên liệu gốc cho video.',
+      image: './assets/images/vd5-thamkhao.jpg'
     },
     { 
       step: '4', 
       title: 'Bước 4: Thổi hồn chuyển động vào bức ảnh', 
       desc: 'Bây giờ, bạn sẽ đưa bức ảnh gốc tĩnh lặng đó vào trong hệ thống trí tuệ nhân tạo chuyên xử lý video. Kết hợp với đoạn câu lệnh chuyển động đã chuẩn bị ở Bước 2, bạn tiến hành căn chỉnh thêm mức độ di chuyển của máy quay. Máy tính sẽ phân tích các điểm ảnh và "thổi hồn", biến khoảnh khắc đứng im thành một đoạn phim sống động, lưu giữ những hình ảnh hào hùng nhất của thanh niên.', 
-    },
-    { 
-      step: 'VD4', 
-      title: 'Ví dụ thực tế: Hoàn thiện video', 
-      example: '💡 Thao tác cuối: Tải ảnh người thanh niên cầm đuốc lên hệ thống. Gắn kèm câu lệnh chuyển động: "Ngọn lửa trên đuốc cháy bập bùng, tàn lửa bay nhẹ trong không trung, máy quay xoay vòng chậm rãi quanh nhân vật". Nhấn nút Tạo và chờ đón thành quả nghệ thuật của tuổi trẻ!',
-      answer: 'Close-up tracking shot. A young man holding a traditional flaming torch. The fire burns intensely with realistic flickering. Small embers and sparks float gently into the air, carried by a light breeze. The camera slowly orbits around him, creating a dramatic 3D parallax effect. High quality, 8k resolution, cinematic lighting, photorealistic fire simulation.',
-      image: ''
     }
   ];
 
