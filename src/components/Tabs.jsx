@@ -250,7 +250,7 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
       title: 'Ví dụ thực tế: Dùng tư liệu tham khảo', 
       example: '💡 Thực hành: Bạn tải lên một bức ảnh chụp tập thể chi đoàn đang tham gia chiến dịch Mùa hè xanh, sau đó yêu cầu hệ thống: "Dựa trên bố cục và trang phục trong bức ảnh này, hãy vẽ lại dưới dạng một bức tranh cổ động nghệ thuật mang màu sắc tươi sáng, rực rỡ."',
       answer: 'Hệ thống sẽ giữ lại cấu trúc bức ảnh gốc của bạn và áp dụng bộ lọc nghệ thuật cổ động lên, biến bức ảnh chụp thông thường thành một tác phẩm nghệ thuật số đầy cảm hứng.',
-      image: ''
+      image: './assets/images/vd3-thamkhao.jpg'
     },
     { 
       step: '4', 
