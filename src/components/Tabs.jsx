@@ -241,16 +241,21 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
       image: ''
     },
     { 
+      step: 'VD3', 
+      title: 'Ví dụ thực tế: Áp dụng prompt', 
+      example: '💡Kết quả sau khi áp dụng prompt',
+      image: './assets/images/vd3-thamkhao.jpg'
+    },
+    { 
       step: '3', 
       title: 'Bước 3: Sử dụng tư liệu tham khảo gốc', 
       desc: 'Đôi khi, việc mô tả bằng lời nói là chưa đủ để diễn tả hết sự độc đáo của một khoảnh khắc. Bạn hoàn toàn có thể cung cấp cho hệ thống trí tuệ nhân tạo một bức ảnh có sẵn làm tài liệu tham khảo. Khi có hình ảnh mốc, máy tính có thể phân tích bố cục, đặc điểm khuôn mặt hoặc màu sắc của áo Đoàn để vẽ ra một bức tranh mới bám sát với thực tế phong trào của chi đoàn bạn hơn.', 
     },
     { 
-      step: 'VD3', 
-      title: 'Ví dụ thực tế: Dùng tư liệu tham khảo', 
-      example: '💡 Thực hành: Bạn tải lên một bức ảnh chụp tập thể chi đoàn đang tham gia chiến dịch Mùa hè xanh, sau đó yêu cầu hệ thống: "Dựa trên bố cục và trang phục trong bức ảnh này, hãy vẽ lại dưới dạng một bức tranh cổ động nghệ thuật mang màu sắc tươi sáng, rực rỡ."',
-      answer: 'Hệ thống sẽ giữ lại cấu trúc bức ảnh gốc của bạn và áp dụng bộ lọc nghệ thuật cổ động lên, biến bức ảnh chụp thông thường thành một tác phẩm nghệ thuật số đầy cảm hứng.',
-      image: './assets/images/vd3-thamkhao.jpg'
+      step: 'VD4', 
+      title: 'Ví dụ thực tế: Dùng hình ảnh tham khảo', 
+      example: '💡Kết quả sau khi thêm hình ảnh và áp dụng prompt: "Thêm nhân vật sau vào ảnh, đồng bộ bối cảnh, ảnh sáng và tỉ lệ nhưng phải giữ nguyên các đặc điểm nhận dạng, khuôn mặt, dáng người. Nhân vật mới sẽ thay thế cô gái đang tưới nước, thay đổi góc nhìn của cô gái để không làm mất đi các chi tiết trên mặt của nhân vật."',
+      image: './assets/images/vd4-thamkhao.jpg'
     },
     { 
       step: '4', 
@@ -258,7 +263,7 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
       desc: 'Sau khi đưa câu lệnh và tư liệu cho hệ thống xử lý, bạn sẽ nhận được các kết quả đầu tiên. Sẽ có những trường hợp máy tính vẽ chưa chính xác các chi tiết đặc thù, chẳng hạn như huy hiệu Đoàn bị mờ. Đừng vội bỏ cuộc, hãy sử dụng tính năng "Chỉnh sửa cục bộ". Tính năng này cho phép bạn khoanh vùng chính xác phần bị lỗi và yêu cầu máy tính chỉ vẽ lại duy nhất khu vực đó mà không làm hỏng tổng thể bức tranh.', 
     },
     { 
-      step: 'VD4', 
+      step: 'VD5', 
       title: 'Ví dụ thực tế: Tinh chỉnh chi tiết', 
       example: '💡 Xử lý lỗi: Bức ảnh tổng thể rất đẹp nhưng huy hiệu Đoàn trên ngực trái áo xanh bị nhòe. Bạn dùng công cụ chỉnh sửa, khoanh tròn vùng ngực trái và gõ thêm một câu lệnh bổ sung cực kỳ ngắn gọn: "Huy hiệu Đoàn Thanh niên Cộng sản Hồ Chí Minh, cờ đỏ sao vàng rõ nét".',
       answer: 'A highly detailed, perfectly shaped badge of the Ho Chi Minh Communist Youth Union on the left chest of the blue shirt. The text "Đoàn Thanh niên Cộng sản Hồ Chí Minh" is crisp and legible. The red flag with a yellow star is vibrant and accurately depicted. Photorealistic texture.',
