@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ref, get, child } from 'firebase/database';
+import { ref, onValue } from 'firebase/database';
 import { db } from '../firebase';
 import Papa from 'papaparse';
 import { Lock, ShieldAlert, Download, Loader2, ArrowLeft, RefreshCw } from 'lucide-react';
@@ -37,34 +37,30 @@ const Admin = () => {
     }
   };
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      let data = [];
-      
-      const snapshot = await get(child(ref(db), 'attendance'));
-      if (snapshot.exists()) {
-        const dbData = snapshot.val();
-        data = Object.values(dbData).map(docData => ({
-          'Họ Tên': docData.name || '',
-          'Trường': docData.school || docData.class || '',
-          'Mã Điểm Danh': docData.attendanceCode || docData.studentId || '',
-          'Thời Gian': docData.timestamp ? new Date(docData.timestamp).toLocaleString() : 'N/A'
-        }));
-      }
-
-      setDataList(data.reverse());
-    } catch (err) {
-      console.error("Error fetching data:", err);
-      setError("Lỗi lấy dữ liệu: " + err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     if (authLevel === 2) {
-      fetchData();
+      setLoading(true);
+      const unsubscribe = onValue(ref(db, 'attendance'), (snapshot) => {
+        if (snapshot.exists()) {
+          const dbData = snapshot.val();
+          const data = Object.values(dbData).map(docData => ({
+            'Họ Tên': docData.name || '',
+            'Trường': docData.school || docData.class || '',
+            'Mã Điểm Danh': docData.attendanceCode || docData.studentId || '',
+            'Thời Gian': docData.timestamp ? new Date(docData.timestamp).toLocaleString() : 'N/A'
+          }));
+          setDataList(data.reverse());
+        } else {
+          setDataList([]);
+        }
+        setLoading(false);
+      }, (err) => {
+        console.error("Error fetching data:", err);
+        setError("Lỗi lấy dữ liệu: " + err.message);
+        setLoading(false);
+      });
+
+      return () => unsubscribe();
     }
   }, [authLevel]);
 
@@ -152,11 +148,10 @@ const Admin = () => {
                 <p className="text-sm text-zinc-400 mt-1">Tổng số: <span className="text-white font-bold">{dataList.length}</span> lượt điểm danh</p>
               </div>
               <button 
-                onClick={fetchData} 
-                className="p-3 bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700/50 hover:border-primary-500/50 hover:text-primary-400 rounded-xl text-zinc-400 transition-all shadow-md group"
-                title="Làm mới dữ liệu"
+                className="p-3 bg-zinc-900/80 border border-zinc-700/50 text-primary-500 rounded-xl transition-all shadow-md group cursor-default"
+                title="Dữ liệu tự động cập nhật theo thời gian thực (Realtime)"
               >
-                <RefreshCw size={20} className={loading ? "animate-spin text-primary-500" : "group-hover:-rotate-180 transition-transform duration-500"} />
+                <RefreshCw size={20} className="animate-spin" />
               </button>
             </div>
             
