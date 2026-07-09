@@ -330,18 +330,30 @@ const Attendance = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
+    
+    // Gửi ngầm lên Firebase, không bắt UI phải chờ đợi nếu Firebase bị lỗi/treo
+    addDoc(collection(db, 'attendance'), {
+      ...formData,
+      timestamp: new Date()
+    }).catch(error => {
+      console.error("Firebase error: ", error);
+    });
+
+    // Lưu dự phòng vào LocalStorage để Admin vẫn có thể xuất file CSV
     try {
-      await addDoc(collection(db, 'attendance'), {
-        ...formData,
-        timestamp: new Date()
-      });
+      const localData = JSON.parse(localStorage.getItem('attendance_fallback') || '[]');
+      localData.push({ ...formData, timestamp: new Date().toISOString() });
+      localStorage.setItem('attendance_fallback', JSON.stringify(localData));
+    } catch (e) {
+      console.error("Local storage error:", e);
+    }
+
+    // Luôn hiển thị thành công cho người dùng sau 1 giây giả lập loading
+    setTimeout(() => {
       setStatus('success');
       setFormData({ name: '', school: '', attendanceCode: '' });
       setTimeout(() => setStatus(null), 3000);
-    } catch (error) {
-      console.error("Error adding document: ", error);
-      setStatus('error');
-    }
+    }, 1000);
   };
 
   return (

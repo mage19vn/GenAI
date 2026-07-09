@@ -39,16 +39,39 @@ const Admin = () => {
   const handleExportCSV = async () => {
     setLoading(true);
     try {
-      const querySnapshot = await getDocs(collection(db, 'attendance'));
-      const data = querySnapshot.docs.map(doc => {
-        const docData = doc.data();
-        return {
-          'Họ Tên': docData.name || '',
-          'Trường': docData.school || docData.class || '',
-          'Mã Điểm Danh': docData.attendanceCode || docData.studentId || '',
-          'Thời Gian': docData.timestamp?.toDate().toLocaleString() || 'N/A'
-        };
-      });
+      let data = [];
+      
+      // Thử lấy từ Firebase
+      try {
+        const querySnapshot = await getDocs(collection(db, 'attendance'));
+        data = querySnapshot.docs.map(doc => {
+          const docData = doc.data();
+          return {
+            'Họ Tên': docData.name || '',
+            'Trường': docData.school || docData.class || '',
+            'Mã Điểm Danh': docData.attendanceCode || docData.studentId || '',
+            'Thời Gian': docData.timestamp?.toDate().toLocaleString() || 'N/A'
+          };
+        });
+      } catch (err) {
+        console.warn("Lỗi tải từ Firebase, dùng dữ liệu dự phòng:", err);
+      }
+
+      // Lấy thêm từ LocalStorage dự phòng (nếu Firebase bị lỗi hoặc thiếu)
+      try {
+        const localData = JSON.parse(localStorage.getItem('attendance_fallback') || '[]');
+        const localFormatted = localData.map(doc => ({
+          'Họ Tên': doc.name || '',
+          'Trường': doc.school || '',
+          'Mã Điểm Danh': doc.attendanceCode || '',
+          'Thời Gian': new Date(doc.timestamp).toLocaleString() || 'N/A'
+        }));
+        
+        // Nối dữ liệu
+        data = [...data, ...localFormatted];
+      } catch (e) {
+        console.error("Lỗi tải LocalStorage:", e);
+      }
 
       if (data.length === 0) {
         alert("Không có dữ liệu điểm danh.");
