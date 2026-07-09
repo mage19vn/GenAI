@@ -108,9 +108,11 @@ const SlideShow = ({ title, slides, mode, setMode }) => {
               <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-zinc-50 tracking-tight leading-tight">{slide.title}</h3>
             </div>
             
-            <p className="text-lg sm:text-xl md:text-2xl text-zinc-300 leading-relaxed max-w-4xl border-l-4 border-primary-500 pl-5 md:pl-6 py-2 font-medium mb-6 bg-gradient-to-r from-primary-500/5 to-transparent rounded-r-xl">
-              {slide.desc}
-            </p>
+            {slide.desc && (
+              <p className="text-lg sm:text-xl md:text-2xl text-zinc-300 leading-relaxed max-w-4xl border-l-4 border-primary-500 pl-5 md:pl-6 py-2 font-medium mb-6 bg-gradient-to-r from-primary-500/5 to-transparent rounded-r-xl">
+                {slide.desc}
+              </p>
+            )}
 
             {slide.details && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-6 w-full max-w-5xl">
@@ -168,68 +170,87 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
   const imageSlides = [
     { 
       step: '1', 
-      title: 'Bước 1: Suy nghĩ và Định hình Ý tưởng', 
-      desc: 'Để Trí tuệ Nhân tạo (AI) có thể vẽ chính xác hình ảnh bạn đang tưởng tượng trong đầu, bạn cần cung cấp đủ 4 mảnh ghép quan trọng sau đây:', 
-      details: ['🐶 Ai hoặc Con gì? (Ví dụ: Một chú chó con lông xù)', '🏡 Đang ở đâu? (Ví dụ: Đang chạy nhảy trên đồng lúa chín vàng)', '🎨 Thể loại tranh gì? (Ví dụ: Vẽ theo kiểu phim hoạt hình 3D)', '☀️ Ánh sáng ra sao? (Ví dụ: Dưới ánh nắng hoàng hôn rực rỡ ấm áp)'],
-      example: '💡 Ví dụ gộp lại: "Một chú chó con lông xù đang chạy nhảy trên đồng lúa chín vàng, vẽ theo kiểu phim hoạt hình 3D, dưới ánh nắng hoàng hôn rực rỡ ấm áp."'
+      title: 'Bước 1: Lên ý tưởng', 
+      desc: 'Bạn cần định hình và viết prompt miêu tả rõ ý tưởng hình ảnh/poster trong đầu cho AI hiểu. Càng chi tiết càng tốt.', 
+      details: ['🐶 Ai/Cái gì?', '🏡 Ở đâu?', '🎨 Phong cách nào?', '☀️ Ánh sáng và màu sắc ra sao?']
+    },
+    { 
+      step: '1.1', 
+      title: 'Ví dụ: Lên ý tưởng', 
+      example: '💡 Ý tưởng ban đầu: "Một chiến binh đứng trên núi tuyết nhìn xuống thành phố tương lai rực rỡ ánh đèn neon dưới thung lũng, phong cách cyberpunk, ánh sáng hoàng hôn."'
     },
     { 
       step: '2', 
-      title: 'Bước 2: Nhờ AI "phiên dịch" lệnh', 
-      desc: 'Các phần mềm vẽ tranh quốc tế thường làm việc tốt nhất với tiếng Anh. Bạn đừng lo nếu không rành ngoại ngữ, chúng ta sẽ nhờ một trợ lý ảo (như Gemini) dịch và trau chuốt lại câu nói của bạn cho thật chuyên nghiệp.', 
-      example: '💡 Lệnh nhờ Gemini: "Bạn hãy dịch câu sau sang tiếng Anh để tôi ra lệnh cho máy vẽ tranh: Một chú chó con chạy ngoài đồng lúa, kiểu hoạt hình 3D..."'
+      title: 'Bước 2: Tạo prompt tiêu chuẩn', 
+      desc: 'Nhờ một AI ngôn ngữ (như ChatGPT hoặc Gemini) để giúp bạn nâng cấp ý tưởng thành một prompt tiêu chuẩn, thật chuyên nghiệp nhưng vẫn bám sát ý tưởng gốc.', 
+    },
+    { 
+      step: '2.1', 
+      title: 'Ví dụ: Tạo prompt tiêu chuẩn', 
+      example: '💡 Lệnh nhờ Gemini: "Hãy đóng vai một chuyên gia đồ họa. Viết cho tôi một prompt tiếng Anh thật chuyên nghiệp cho Midjourney, bám sát ý tưởng sau: Một chiến binh đứng trên núi tuyết nhìn xuống thành phố cyberpunk..."'
     },
     { 
       step: '3', 
-      title: 'Bước 3: Giao việc cho máy vẽ', 
-      desc: 'Bây giờ, bạn chỉ việc sao chép (copy) đoạn tiếng Anh vừa được dịch và dán vào phần mềm tạo ảnh. Tuyệt vời hơn, bạn có thể gửi kèm một bức ảnh thật của mình làm mẫu để máy vẽ theo đúng tỷ lệ khuôn mặt.', 
-      example: '💡 Mẹo cực hay: Bạn chụp ảnh chú cún cưng ở nhà tải lên làm ảnh gốc, rồi gửi kèm đoạn chữ tiếng Anh vừa dịch. Máy sẽ vẽ ra một chú chó hoạt hình y hệt cún nhà bạn!'
+      title: 'Bước 3: Cung cấp tư liệu thêm', 
+      desc: 'Bạn có thể cung cấp các tư liệu thêm cho AI như hình ảnh (ảnh chân dung thật, ảnh bố cục mẫu), thông tin, hoặc tài liệu (Image-to-Image) để AI vẽ bám sát yêu cầu thực tế hơn.', 
+    },
+    { 
+      step: '3.1', 
+      title: 'Ví dụ: Cung cấp tư liệu', 
+      example: '💡 Bạn tải lên một bức ảnh chụp khuôn mặt bản thân, sau đó gửi kèm prompt tiếng Anh vừa tạo. AI sẽ tạo ra nhân vật cyberpunk mang khuôn mặt của chính bạn.'
     },
     { 
       step: '4', 
-      title: 'Bước 4: Chỉnh sửa các lỗi nhỏ', 
-      desc: 'Đôi khi AI có thể vẽ thừa ngón tay hoặc sai chi tiết nhỏ. Thay vì bỏ đi bức tranh và bắt máy vẽ lại từ đầu rất tốn thời gian, bạn chỉ cần sử dụng tính năng khoanh vùng sửa lỗi cục bộ.', 
-      example: '💡 Ví dụ: Bạn dùng chuột khoanh tròn vào cái chân bị vẽ thừa, sau đó gõ chữ "xóa cái chân này đi" (bằng tiếng Anh). AI sẽ lập tức tẩy đi và đắp lại khung cảnh cho chuẩn xác.'
+      title: 'Bước 4: Tạo hình và chỉnh sửa', 
+      desc: 'Giao prompt và tư liệu cho công cụ AI tạo ảnh. Nếu bức ảnh có lỗi nhỏ (thừa ngón tay, sai chi tiết), dùng tính năng Inpainting (chỉnh sửa cục bộ) để khoanh vùng và yêu cầu AI sửa lại chỗ đó.', 
+    },
+    { 
+      step: '4.1', 
+      title: 'Ví dụ: Tạo hình và chỉnh sửa', 
+      example: '💡 Hình AI tạo ra rất đẹp nhưng thanh gươm bị cong. Bạn khoanh vùng thanh gươm và gõ prompt: "A straight, glowing futuristic neon sword" để AI sửa đổi.'
     }
   ];
 
   const videoSlides = [
     { 
       step: '1', 
-      title: 'Bước 1: Lên kịch bản chi tiết', 
-      desc: 'Để tạo ra một đoạn phim ngắn, bạn cần bắt đầu bằng việc viết ra một câu miêu tả thật rõ ràng. Hãy hình dung bạn đang kể một câu chuyện: Có ai, đang làm hành động gì, và khung cảnh xung quanh ra sao?', 
-      example: '💡 Kịch bản ví dụ: "Một đám trẻ con đang nô đùa thi nhau thả diều trên con đường làng bằng đất nện vào một buổi chiều gió mát."'
+      title: 'Bước 1: Lên ý tưởng', 
+      desc: 'Bạn cần viết ra một miêu tả thật rõ ràng cho ý tưởng video của mình. Tập trung vào chủ thể, hành động đang diễn ra và sự thay đổi của bối cảnh.', 
+    },
+    { 
+      step: '1.1', 
+      title: 'Ví dụ: Lên ý tưởng', 
+      example: '💡 Ý tưởng video: "Một phi hành gia đang bước đi chậm rãi trên bề mặt sao Hỏa, cát bụi bay mù mịt theo từng bước chân."'
     },
     { 
       step: '2', 
-      title: 'Bước 2: Tách kịch bản thành 2 mảnh', 
-      desc: 'Máy làm phim cần hiểu rõ 2 thứ để làm việc tốt nhất. Một là "Bức tranh lúc bắt đầu trông như thế nào", hai là "Mọi thứ sẽ chuyển động ra sao". Bạn hãy nhờ Gemini tách kịch bản ra giúp bạn.', 
-      example: '🖼️ [Phần Hình Ảnh]: Bọn trẻ đang cầm diều đứng trên đường làng đất nện.\n🌪️ [Phần Chuyển Động]: Cánh diều bay vút lên cao, gió thổi phấp phới, góc nhìn chạy theo cánh diều.'
+      title: 'Bước 2: Tạo prompt tiêu chuẩn', 
+      desc: 'Cho AI ngôn ngữ tạo ra một prompt tiêu chuẩn chuyên nghiệp cho ý tưởng video, đảm bảo phân chia rõ hình ảnh và các chuyển động của camera (camera motion) bám sát ý tưởng.', 
+    },
+    { 
+      step: '2.1', 
+      title: 'Ví dụ: Tạo prompt tiêu chuẩn', 
+      example: '💡 Lệnh nhờ AI: "Hãy viết prompt tiếng Anh để tạo video trên Runway. Mô tả chi tiết: Astronaut walking slowly on Mars, dust swirling around the boots, cinematic tracking shot."'
     },
     { 
       step: '3', 
-      title: 'Bước 3: Đặt góc máy quay như phim rạp', 
-      desc: 'Để đoạn phim không bị nhàm chán, bạn có thể ra lệnh cho máy tính cách cầm máy quay giống hệt như một người thợ quay phim chuyên nghiệp đang ghi hình bộ phim của bạn.', 
-      details: ['➡️ Lia máy: Quay từ từ sang trái hoặc phải để quét toàn bộ phong cảnh', '↕️ Cuộn máy: Ngước máy lên nhìn bầu trời hoặc cúi xuống nhìn mặt đất', '🔍 Thu phóng: Phóng to ống kính vào sát khuôn mặt một người', '🏃‍♂️ Chạy theo: Máy quay di chuyển chạy ngay phía sau lưng nhân vật'],
-      example: '💡 Ví dụ: "Hãy lia máy quay từ từ sang ngang để khán giả có thể nhìn thấy hết cả một cánh đồng lúa bao la".'
+      title: 'Bước 3: Tạo ảnh làm khung hình gốc', 
+      desc: 'Liên hệ đến phần Tạo Ảnh trước đó: Thay vì để AI tự làm video từ số 0, hãy dùng công cụ vẽ tạo ra một bức ảnh tĩnh thật ưng ý làm khung hình mở màn (First Frame) cho đoạn phim.', 
+    },
+    { 
+      step: '3.1', 
+      title: 'Ví dụ: Tạo ảnh', 
+      example: '💡 Dùng Midjourney để vẽ ra bức ảnh tĩnh cực kỳ sắc nét về "Phi hành gia đứng trên sao Hỏa", sau đó lưu bức ảnh này về máy.'
     },
     { 
       step: '4', 
-      title: 'Bước 4: Vẽ bức tranh mở màn', 
-      desc: 'Đây là bước cực kỳ quan trọng! Trước khi làm phim, bạn hãy dùng công cụ vẽ tranh (đã học ở phần Tạo Ảnh) để tạo ra một bức ảnh tĩnh thật ưng ý. Đoạn phim của bạn sẽ bắt đầu chuyển động từ chính bức ảnh này.', 
-      example: '💡 Hướng dẫn: Bạn truy cập công cụ vẽ, yêu cầu máy vẽ cảnh bọn trẻ cầm diều trên đường làng thật sắc nét và lưu bức ảnh đó về máy tính.'
+      title: 'Bước 4: Dùng Ảnh và Prompt tạo Video', 
+      desc: 'Tải bức ảnh vừa tạo (gồm background, nhân vật... ngoài ra có thể bổ sung ảnh thật) vào AI tạo video (Image-to-Video). Nhập prompt để AI làm hình ảnh đó chuyển động thành video hoàn chỉnh.', 
     },
     { 
-      step: '5', 
-      title: 'Bước 5: Thổi hồn cho bức tranh', 
-      desc: 'Bây giờ, bạn mở phần mềm làm video AI lên. Tải bức ảnh tĩnh vừa vẽ ở Bước 4 vào phần mềm, sau đó cung cấp thêm "Câu tả chuyển động" (đã chuẩn bị ở Bước 2). Máy tính sẽ tự động tạo ra thước phim!', 
-      example: '💡 Thực hành: Tải bức tranh cánh đồng lên, gõ thêm lệnh: "Gió thổi mạnh, bông lúa đung đưa, bọn trẻ ùa chạy về phía trước".'
-    },
-    { 
-      step: '6', 
-      title: 'Bước 6: Tinh chỉnh tốc độ chuyển động', 
-      desc: 'Một lỗi rất thường gặp là dặn máy cho người chạy quá nhanh, khiến hình ảnh trong video bị móp méo, biến dạng. Bí quyết là hãy dặn máy cho cử động từ từ và tự nhiên thôi.', 
-      example: '💡 Mẹo xử lý: Nếu thấy video bị méo, bạn hãy tìm thanh trượt "Độ mạnh chuyển động" (Motion Strength) kéo xuống thấp để mọi cử động trở nên mượt mà, chân thực nhất.'
+      step: '4.1', 
+      title: 'Ví dụ: Dùng ảnh và prompt tạo video', 
+      example: '💡 Tải ảnh phi hành gia lên công cụ Video. Thiết lập Camera đi theo nhân vật, dán prompt: "Slow walking motion, dust particles flying, cinematic lighting". Bấm Generate!'
     }
   ];
 
