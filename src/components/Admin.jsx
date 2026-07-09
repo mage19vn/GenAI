@@ -40,50 +40,20 @@ const Admin = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      let dataMap = new Map();
+      let data = [];
       
-      // Thử lấy từ Firebase Realtime Database
-      try {
-        const snapshot = await get(child(ref(db), 'attendance'));
-        if (snapshot.exists()) {
-          const dbData = snapshot.val();
-          Object.values(dbData).forEach(docData => {
-            const code = docData.attendanceCode || docData.studentId || '';
-            const timestamp = docData.timestamp ? new Date(docData.timestamp).toLocaleString() : 'N/A';
-            const uniqueKey = code + '_' + timestamp; // Khóa duy nhất chống trùng lặp
-            dataMap.set(uniqueKey, {
-              'Họ Tên': docData.name || '',
-              'Trường': docData.school || docData.class || '',
-              'Mã Điểm Danh': code,
-              'Thời Gian': timestamp
-            });
-          });
-        }
-      } catch (err) {
-        console.warn("Lỗi tải từ Firebase:", err);
+      const snapshot = await get(child(ref(db), 'attendance'));
+      if (snapshot.exists()) {
+        const dbData = snapshot.val();
+        data = Object.values(dbData).map(docData => ({
+          'Họ Tên': docData.name || '',
+          'Trường': docData.school || docData.class || '',
+          'Mã Điểm Danh': docData.attendanceCode || docData.studentId || '',
+          'Thời Gian': docData.timestamp ? new Date(docData.timestamp).toLocaleString() : 'N/A'
+        }));
       }
 
-      // Lấy thêm từ LocalStorage dự phòng, lọc bỏ trùng lặp
-      try {
-        const localData = JSON.parse(localStorage.getItem('attendance_fallback') || '[]');
-        localData.forEach(doc => {
-          const code = doc.attendanceCode || '';
-          const timestamp = doc.timestamp ? new Date(doc.timestamp).toLocaleString() : 'N/A';
-          const uniqueKey = code + '_' + timestamp;
-          if (!dataMap.has(uniqueKey)) {
-            dataMap.set(uniqueKey, {
-              'Họ Tên': doc.name || '',
-              'Trường': doc.school || '',
-              'Mã Điểm Danh': code,
-              'Thời Gian': timestamp
-            });
-          }
-        });
-      } catch (e) {
-        console.error("Lỗi tải LocalStorage:", e);
-      }
-
-      setDataList(Array.from(dataMap.values()).reverse());
+      setDataList(data.reverse());
     } catch (err) {
       console.error("Error fetching data:", err);
       setError("Lỗi lấy dữ liệu: " + err.message);

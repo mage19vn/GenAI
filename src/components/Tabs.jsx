@@ -331,29 +331,19 @@ const Attendance = () => {
     e.preventDefault();
     setStatus('submitting');
     
-    // Gửi ngầm lên Firebase Realtime Database
-    push(ref(db, 'attendance'), {
-      ...formData,
-      timestamp: new Date().toISOString()
-    }).catch(error => {
-      console.error("Firebase error: ", error);
-    });
-
-    // Lưu dự phòng vào LocalStorage để Admin vẫn có thể xuất file CSV
     try {
-      const localData = JSON.parse(localStorage.getItem('attendance_fallback') || '[]');
-      localData.push({ ...formData, timestamp: new Date().toISOString() });
-      localStorage.setItem('attendance_fallback', JSON.stringify(localData));
-    } catch (e) {
-      console.error("Local storage error:", e);
-    }
-
-    // Luôn hiển thị thành công cho người dùng sau 1 giây giả lập loading
-    setTimeout(() => {
+      await push(ref(db, 'attendance'), {
+        ...formData,
+        timestamp: new Date().toISOString()
+      });
       setStatus('success');
       setFormData({ name: '', school: '', attendanceCode: '' });
       setTimeout(() => setStatus(null), 3000);
-    }, 1000);
+    } catch (error) {
+      console.error("Firebase error: ", error);
+      setStatus('error');
+      setTimeout(() => setStatus(null), 3000);
+    }
   };
 
   return (
