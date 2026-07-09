@@ -265,9 +265,8 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
     { 
       step: 'VD5', 
       title: 'Ví dụ thực tế: Tinh chỉnh chi tiết', 
-      example: '💡 Xử lý lỗi: Bức ảnh tổng thể rất đẹp nhưng huy hiệu Đoàn trên ngực trái áo xanh bị nhòe. Bạn dùng công cụ chỉnh sửa, khoanh tròn vùng ngực trái và gõ thêm một câu lệnh bổ sung cực kỳ ngắn gọn: "Huy hiệu Đoàn Thanh niên Cộng sản Hồ Chí Minh, cờ đỏ sao vàng rõ nét".',
-      answer: 'A highly detailed, perfectly shaped badge of the Ho Chi Minh Communist Youth Union on the left chest of the blue shirt. The text "Đoàn Thanh niên Cộng sản Hồ Chí Minh" is crisp and legible. The red flag with a yellow star is vibrant and accurately depicted. Photorealistic texture.',
-      image: ''
+      example: '💡 Xử lý lỗi: Thay đổi 1 vài chi tiết chưa vừa ý: "Chỉ chỉnh sửa nhân vật đang tưới nước: bỏ nón, bỏ bình tưới và mọi vật trên tay. Đổi tư thế thành đang đứng lau mồ hôi trên trán bằng một tay, tay còn lại buông tự nhiên, không cầm gì. Giữ nguyên trang phục, khuôn mặt, vị trí, bối cảnh, ánh sáng và tất cả các chi tiết khác của ảnh. Chỉnh sửa phải tự nhiên, chân thực và liền mạch."',
+      image: './assets/images/vd5-thamkhao.jpg'
     }
   ];
 
