@@ -98,4 +98,5 @@ npm run deploy
 
 <div align="center">
   <p>Được thiết kế và xây dựng với ❤️ phục vụ <strong>Công tác Đoàn & Phong trào Thanh thiếu nhi</strong>.</p>
+  <p>Tác giả: <em>Mage__08</em></p>
 </div>
