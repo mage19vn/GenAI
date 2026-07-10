@@ -200,6 +200,11 @@ const SlideShow = ({ title, slides, mode, setMode }) => {
                 <img src={slide.image} alt="Ví dụ minh họa" className="max-w-full max-h-[400px] object-contain rounded-lg shadow-lg" />
               </div>
             )}
+            {slide.video && (
+              <div className="mt-4 w-full max-w-4xl rounded-xl overflow-hidden border border-zinc-700/50 shadow-2xl relative flex justify-center bg-zinc-900/50 py-4">
+                <video src={slide.video} controls autoPlay loop muted playsInline className="max-w-full max-h-[400px] object-contain rounded-lg shadow-lg" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -333,6 +338,12 @@ const GuideWrapper = ({ activeTab, setActiveTab }) => {
       example: '💡 Thao tác cuối: Tải bức ảnh tĩnh (hoặc nhiều bức ảnh tĩnh) lên hệ thống. Gắn kèm câu lệnh chuyển động tiếng Anh đã chuẩn bị ở VD2. Nhấn nút Tạo và chờ đón thước phim sống động của tuổi trẻ!',
       answer: 'Cinematic video, high-quality portrait of a Vietnamese youth volunteer girl wiping sweat from her forehead. Gentle morning breeze rustling the leaves and blowing her hair slightly. She lowers her hand and smiles brightly. The golden sunrise light gradually becomes more radiant through the trees. Slow camera zoom in, capturing her enthusiastic expression. Hyper-realistic motion, 4k resolution, smooth tracking shot.',
       image: ''
+    },
+    { 
+      step: 'VD5', 
+      title: 'Ví dụ thực tế: Kết quả Video AI', 
+      example: '💡 Video kết quả sau khi AI phân tích ảnh gốc và áp dụng câu lệnh chuyển động đã cung cấp:',
+      video: './assets/videos/demo.mp4'
     }
   ];
 
