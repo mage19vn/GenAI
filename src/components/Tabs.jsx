@@ -37,19 +37,38 @@ const SlideShow = ({ title, slides, mode, setMode }) => {
 
   useEffect(() => {
     const onFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
+      setIsFullscreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
     };
     document.addEventListener('fullscreenchange', onFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', onFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', onFullscreenChange);
+    };
   }, []);
 
   const toggleFullscreen = async () => {
-    if (!document.fullscreenElement) {
-      if (containerRef.current) {
-        await containerRef.current.requestFullscreen().catch(err => console.log(err));
+    const elem = containerRef.current;
+    if (!elem) return;
+
+    const isNativeFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+
+    if (!isNativeFullscreen && !isFullscreen) {
+      if (elem.requestFullscreen) {
+        await elem.requestFullscreen().catch(() => setIsFullscreen(true));
+      } else if (elem.webkitRequestFullscreen) {
+        await elem.webkitRequestFullscreen().catch(() => setIsFullscreen(true));
+      } else {
+        setIsFullscreen(true);
       }
     } else {
-      await document.exitFullscreen().catch(err => console.log(err));
+      if (document.exitFullscreen && document.fullscreenElement) {
+        await document.exitFullscreen().catch(() => setIsFullscreen(false));
+      } else if (document.webkitExitFullscreen && document.webkitFullscreenElement) {
+        await document.webkitExitFullscreen().catch(() => setIsFullscreen(false));
+      } else {
+        setIsFullscreen(false);
+      }
     }
   };
 
@@ -60,7 +79,7 @@ const SlideShow = ({ title, slides, mode, setMode }) => {
       <div 
         ref={containerRef}
         className={`w-full flex flex-col relative overflow-hidden transition-all duration-500 shadow-[0_0_50px_rgba(0,0,0,0.5)] 
-        ${isFullscreen ? 'bg-zinc-950 h-screen justify-center rounded-none border-none' : 'glass-panel min-h-[450px] md:min-h-[550px]'}`}
+        ${isFullscreen ? 'bg-zinc-950 h-[100dvh] justify-center rounded-none border-none fixed inset-0 z-[100]' : 'glass-panel min-h-[450px] md:min-h-[550px]'}`}
       >
         {/* Mode Toggle inside Fullscreen */}
         {isFullscreen && setMode && (

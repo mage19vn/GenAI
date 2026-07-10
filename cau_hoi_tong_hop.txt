@@ -1,0 +1,63 @@
+DANH SÁCH CÂU HỎI TRẮC NGHIỆM TỔNG HỢP KIẾN THỨC BÀI GIẢNG AI (TẠO ẢNH & TẠO VIDEO)
+
+--- PHẦN 1: HỌC TẠO ẢNH ---
+
+Câu 1: Để AI tạo ra một hình ảnh bám sát ý tưởng nhất, bạn cần mô tả chi tiết những yếu tố nào?
+A. Chỉ cần mô tả màu sắc chủ đạo của bức tranh.
+B. Không gian, thời gian, con người, hoạt động, cảm xúc và phong cách nghệ thuật.
+C. Câu lệnh lập trình phức tạp.
+D. Tên của các phần mềm đồ họa chuyên nghiệp.
+=> Đáp án đúng: B
+
+Câu 2: Tại sao nên dùng Trợ lý ảo (như ChatGPT, Gemini) để chuyển đổi ý tưởng thành câu lệnh (prompt)?
+A. Vì hệ thống tạo ảnh chỉ hiểu được ngôn ngữ lập trình.
+B. Để tự động đăng kết quả lên mạng xã hội.
+C. Giúp dịch sang tiếng Anh chuyên ngành và sắp xếp các từ khóa tối ưu để AI tạo ảnh hiểu tốt nhất.
+D. Vì Trợ lý ảo sẽ vẽ ảnh trực tiếp thay cho công cụ tạo ảnh.
+=> Đáp án đúng: C
+
+Câu 3: Mục đích của tính năng "Sử dụng tư liệu tham khảo gốc" (Image-to-image) là gì?
+A. Chép y hệt bức ảnh gốc mà không thay đổi bất kỳ chi tiết nào.
+B. Tự động tìm kiếm hình ảnh tương tự trên Google.
+C. Ghép hai bức ảnh khác nhau thành một.
+D. Dùng một bức ảnh có sẵn làm mốc để AI phân tích bố cục, đặc điểm và vẽ ra một bức tranh mới bám sát thực tế hơn.
+=> Đáp án đúng: D
+
+Câu 4: Khi bức ảnh AI tạo ra có tổng thể rất đẹp nhưng bị lỗi một chi tiết nhỏ (ví dụ: huy hiệu Đoàn bị mờ), bạn nên làm gì?
+A. Xóa ảnh và yêu cầu AI tạo lại từ đầu.
+B. Dùng tính năng "Chỉnh sửa cục bộ" (Inpainting) để khoanh vùng và yêu cầu máy tính chỉ vẽ lại duy nhất khu vực bị lỗi.
+C. Tăng độ phân giải của toàn bộ bức ảnh lên 8K.
+D. Thay đổi phong cách nghệ thuật của bức ảnh sang dạng hoạt hình.
+=> Đáp án đúng: B
+
+
+--- PHẦN 2: HỌC TẠO VIDEO ---
+
+Câu 6: Theo hướng dẫn, bước đầu tiên và quan trọng nhất khi sản xuất một đoạn phim ngắn bằng AI là gì?
+A. Viết một kịch bản rõ ràng, mô tả chi tiết hành động bắt đầu, chuyển động xung quanh và sự biến đổi khung cảnh.
+B. Chọn nhạc nền cho video.
+C. Lồng tiếng cho các nhân vật trong video.
+D. Cân chỉnh lại màu sắc (color grading) cho toàn bộ video.
+=> Đáp án đúng: A
+
+Câu 7: Vì sao cần phân tách kịch bản thành phần "hình ảnh tĩnh" và "chuyển động" khi yêu cầu AI tạo video?
+A. Giúp video render nhanh hơn bình thường.
+B. Giúp AI không bị nhầm lẫn giữa việc nhân vật di chuyển hay máy quay (camera) di chuyển.
+C. Giúp tăng độ phân giải của video lên mức tối đa.
+D. Vì hệ thống AI chỉ đọc được mỗi câu lệnh gồm 2 dòng.
+=> Đáp án đúng: B
+
+Câu 8: Theo bài giảng, bí quyết quan trọng nhất để tạo ra một video mượt mà, sắc nét mà không bị mờ nhòe là gì?
+A. Viết câu lệnh chuyển động thật dài và phức tạp.
+B. Không yêu cầu máy tính tự tạo video từ con số không, mà sử dụng một bức ảnh tĩnh mở màn thật hoàn mỹ làm điểm tựa (nguyên liệu gốc).
+C. Chỉnh tốc độ khung hình (FPS) lên 60.
+D. Sử dụng phần mềm chỉnh sửa video chuyên nghiệp của bên thứ ba để khử nhiễu.
+=> Đáp án đúng: B
+
+Câu 9: Trong bước "Thổi hồn chuyển động vào bức ảnh", máy tính sẽ dựa vào những yếu tố nào để tạo ra đoạn phim?
+A. Bức ảnh tĩnh được tải lên và đoạn âm thanh mô tả.
+B. Nhiều bức ảnh chụp liên tiếp ghép lại.
+C. Bức ảnh gốc tĩnh lặng kết hợp với đoạn câu lệnh chuyển động đã được phân tách rõ ràng.
+D. Lời nói trực tiếp của người dùng qua micro.
+=> Đáp án đúng: C
+
