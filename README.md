@@ -4,7 +4,7 @@
   <p align="center">
     Nền tảng học tập và hướng dẫn tạo ảnh/video bằng Trí tuệ Nhân tạo (AI) chuyên nghiệp dành cho công tác Đoàn.
     <br />
-    <a href="https://mage19vn.github.io/GenAI/" target="_blank" style="color: green !important; font-weight: bold;">Khám phá Website ngay »</a>
+    <a href="https://mage19vn.github.io/GenAI/"><strong>🚀 Khám phá Website ngay »</strong></a>
     <br />
     <br />
     <a href="#tính-năng-nổi-bật">Tính năng</a>
@@ -98,5 +98,5 @@ npm run deploy
 
 <div align="center">
   <p>Được thiết kế và xây dựng với ❤️ phục vụ <strong>Công tác Đoàn & Phong trào Thanh thiếu nhi</strong>.</p>
-  <p style="color: cyan !important; font-weight: bold;">Tác giả: <span style="color: red !important; font-weight: bold;">Mage__08</span></p>
+  <p><strong>Tác giả: <em>Mage__08</em></strong></p>
 </div>
