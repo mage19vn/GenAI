@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ref, onValue } from 'firebase/database';
+import { ref, onValue, get, set } from 'firebase/database';
 import { db } from '../firebase';
 import Papa from 'papaparse';
-import { Lock, ShieldAlert, Download, Loader2, ArrowLeft, RefreshCw } from 'lucide-react';
+import { Lock, ShieldAlert, Download, Loader2, ArrowLeft, RefreshCw, Database } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Admin = () => {
@@ -73,10 +73,51 @@ const Admin = () => {
     const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'attendance.csv';
+    const dd = String(new Date().getDate()).padStart(2, '0');
+    link.download = `mag${dd}.csv`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const handleDeduplicate = async () => {
+    try {
+      setLoading(true);
+      const snapshot = await get(ref(db, 'attendance'));
+      if (snapshot.exists()) {
+        const dbData = snapshot.val();
+        const uniqueRecords = {};
+        let count = 0;
+        
+        Object.entries(dbData).forEach(([key, record]) => {
+          if (!record.name) return;
+          const rawName = record.name.trim();
+          const normalizedName = rawName.replace(/\s+/g, ' ').toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+          const firebaseKey = normalizedName.replace(/[.#$\[\]]/g, '');
+          
+          if (!uniqueRecords[firebaseKey]) {
+            uniqueRecords[firebaseKey] = { ...record, name: normalizedName };
+            count++;
+          } else {
+            const currentRecordTime = new Date(record.timestamp || 0).getTime();
+            const storedRecordTime = new Date(uniqueRecords[firebaseKey].timestamp || 0).getTime();
+            if (currentRecordTime > storedRecordTime) {
+              uniqueRecords[firebaseKey] = { ...record, name: normalizedName };
+            }
+          }
+        });
+
+        await set(ref(db, 'attendance'), uniqueRecords);
+        alert(`Đã chuẩn hóa thành công! Dữ liệu sau chuẩn hóa còn ${count} bản ghi.`);
+      } else {
+        alert('Không có dữ liệu để chuẩn hóa.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Lỗi chuẩn hóa: ' + err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -193,14 +234,25 @@ const Admin = () => {
               )}
             </div>
             
-            <button 
-              onClick={handleExportCSV}
-              disabled={loading || dataList.length === 0}
-              className="btn-primary w-full flex items-center justify-center gap-3 py-4 text-lg mt-4 shadow-[0_0_20px_rgba(20,184,166,0.15)] disabled:shadow-none"
-            >
-              <Download size={22} className={loading ? "opacity-50" : ""} /> 
-              {loading ? "Đang xuất..." : "Xuất file CSV"}
-            </button>
+            <div className="flex gap-4 mt-4">
+              <button 
+                onClick={handleDeduplicate}
+                disabled={loading || dataList.length === 0}
+                className="w-1/2 flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(20,184,166,0.15)] disabled:shadow-none bg-zinc-800 text-zinc-300 hover:bg-zinc-700 disabled:opacity-50"
+              >
+                <Database size={22} className={loading ? "opacity-50" : ""} /> 
+                {loading ? "Đang xử lý..." : "Chuẩn hóa DB"}
+              </button>
+              
+              <button 
+                onClick={handleExportCSV}
+                disabled={loading || dataList.length === 0}
+                className="btn-primary w-1/2 flex items-center justify-center gap-2 py-4 text-lg shadow-[0_0_20px_rgba(20,184,166,0.15)] disabled:shadow-none"
+              >
+                <Download size={22} className={loading ? "opacity-50" : ""} /> 
+                {loading ? "Đang xuất..." : "Xuất file CSV"}
+              </button>
+            </div>
           </div>
         )}
       </div>

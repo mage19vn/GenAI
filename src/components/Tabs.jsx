@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ref, push } from 'firebase/database';
+import { ref, push, set } from 'firebase/database';
 import { db } from '../firebase';
 import { Image, Video, Laptop, UserCheck, Sparkles, Wand2, ChevronLeft, ChevronRight, Maximize, Minimize, Copy, Check } from 'lucide-react';
 
@@ -362,8 +362,15 @@ const Attendance = () => {
     setStatus('submitting');
     
     try {
-      await push(ref(db, 'attendance'), {
+      const rawName = formData.name.trim();
+      // Standardize name: lowercase all, then capitalize first letter of each word
+      const normalizedName = rawName.replace(/\s+/g, ' ').toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+      // Remove characters that are invalid in Firebase keys: . # $ [ ]
+      const firebaseKey = normalizedName.replace(/[.#$\[\]]/g, '');
+
+      await set(ref(db, `attendance/${firebaseKey}`), {
         ...formData,
+        name: normalizedName,
         timestamp: new Date().toISOString()
       });
       setStatus('success');
